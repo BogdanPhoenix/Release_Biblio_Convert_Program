@@ -1,7 +1,4 @@
 #include "Start_Form.h"
-#include "Info.h"
-#include "Converting.h"
-#include "Function.h"
 
 [STAThreadAttribute]
 int main(cli::array<System::String^>^ args) {
@@ -12,31 +9,27 @@ int main(cli::array<System::String^>^ args) {
 	Application::SetCompatibleTextRenderingDefault(false);
 
 	BiblioConvertProgram::Start_Form form;
-	Application::Run(% form);
-	if (!System_Check())
-		Application::Exit();
-	else
+	if (System_Check())
 		Application::Run(% form);
+	else
+		Application::Exit();
 }
-
+//exit window
 System::Void BiblioConvertProgram::Start_Form::button_Exit_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	Application::Exit();
 }
-
+// minimizes the window to the taskbar
 System::Void BiblioConvertProgram::Start_Form::button_Draw_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	WindowState = FormWindowState::Minimized;
 }
-
-System::Void BiblioConvertProgram::Start_Form::label_Info_Click(System::Object^ sender, System::EventArgs^ e)
-{
-	info->Show();
-}
-
+// open the information window
+System::Void BiblioConvertProgram::Start_Form::label_Info_Click(System::Object^ sender, System::EventArgs^ e) { info->Show(); }
+// open the converter type selection window
 System::Void BiblioConvertProgram::Start_Form::button_Convert_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	Converting^ conv = gcnew Converting();
+	Converting_Type^ conv = gcnew Converting_Type();
 	this->Hide();
 	conv->Show();
 }

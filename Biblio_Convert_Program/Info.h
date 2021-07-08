@@ -39,8 +39,6 @@ namespace BiblioConvertProgram {
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Panel^ panel2;
 	private: System::Windows::Forms::Button^ button_Exit;
-
-
 	private:
 		/// <summary>
 		/// Обязательная переменная конструктора.

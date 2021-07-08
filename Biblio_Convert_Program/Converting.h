@@ -1,6 +1,9 @@
 #pragma once
 #include "Function.h"
 #include "Check_Exit.h"
+#include "Start_Form.h"
+#include "Finish_Form.h"
+#include "Class_Type.h"
 
 namespace BiblioConvertProgram {
 
@@ -17,15 +20,21 @@ namespace BiblioConvertProgram {
 	/// </summary>
 	public ref class Converting : public System::Windows::Forms::Form
 	{
-	private: Check_Exit^ return_from_exit;
+	private: Check_Exit^ return_exit;
+	private: int Combo_Index;
 	public:
+		Converting(int Combo_Index) {
+			this->Combo_Index = Combo_Index;
+		}
 		Converting(void)
 		{
 			InitializeComponent();
-			return_from_exit = gcnew Check_Exit();
+			comboBox_Variant->SelectedIndex = Combo_Index;
+			comboBox_Variant->Items->ToString();
 			// we make the main form parental
-			return_from_exit->Owner = this;
-			return_from_exit->Hide();
+			return_exit = gcnew Check_Exit();
+			return_exit->Owner = this;
+			return_exit->Hide();
 		}
 
 	protected:
@@ -42,37 +51,28 @@ namespace BiblioConvertProgram {
 	private: System::Windows::Forms::Panel^ panel1;
 	private: System::Windows::Forms::Button^ button_Exit;
 	private: System::Windows::Forms::Button^ button_Draw;
-
-
+	private: System::Windows::Forms::MenuStrip^ menuStrip1;
+	private: System::Windows::Forms::ToolStripMenuItem^ ÏÂÌ˛ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ ÒÚ‡ÚÓ‚ËÈ≈Í‡ÌToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ ÔÓÎÂ¬Ë·ÓÛ ÓÌ‚ÂÚ‡ÚÓ‡ToolStripMenuItem;
 	private: System::Windows::Forms::Panel^ panel2;
 	private: System::Windows::Forms::Button^ button_Search_open_File;
-
 	private: System::Windows::Forms::TextBox^ textBox_openFile;
-
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::OpenFileDialog^ openFileDialog1;
 	private: System::Windows::Forms::Panel^ panel3;
 	private: System::Windows::Forms::TextBox^ textBox_save_File;
-
-
 	private: System::Windows::Forms::Label^ label2;
-
-
-
 	private: System::Windows::Forms::Panel^ panel4;
 	private: System::Windows::Forms::Button^ button_Close;
-
 	private: System::Windows::Forms::Button^ button_Convert;
-
 	private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 	private: System::Windows::Forms::Button^ button_Search_save_File;
 	private: System::Windows::Forms::Label^ label_Open;
 	private: System::Windows::Forms::Label^ label_Save;
-	private: System::Windows::Forms::Button^ button_Back;
-
-
-	protected:
-
+	private: System::Windows::Forms::Panel^ panel5;
+	private: System::Windows::Forms::ComboBox^ comboBox_Variant;
+	private: System::Windows::Forms::Label^ label3;
 	private:
 		/// <summary>
 		/// Œ·ˇÁ‡ÚÂÎ¸Ì‡ˇ ÔÂÂÏÂÌÌ‡ˇ ÍÓÌÒÚÛÍÚÓ‡.
@@ -87,7 +87,6 @@ namespace BiblioConvertProgram {
 		void InitializeComponent(void)
 		{
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->button_Back = (gcnew System::Windows::Forms::Button());
 			this->button_Draw = (gcnew System::Windows::Forms::Button());
 			this->button_Exit = (gcnew System::Windows::Forms::Button());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
@@ -105,17 +104,25 @@ namespace BiblioConvertProgram {
 			this->button_Close = (gcnew System::Windows::Forms::Button());
 			this->button_Convert = (gcnew System::Windows::Forms::Button());
 			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
+			this->panel5 = (gcnew System::Windows::Forms::Panel());
+			this->comboBox_Variant = (gcnew System::Windows::Forms::ComboBox());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->ÏÂÌ˛ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ÒÚ‡ÚÓ‚ËÈ≈Í‡ÌToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ÔÓÎÂ¬Ë·ÓÛ ÓÌ‚ÂÚ‡ÚÓ‡ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->panel1->SuspendLayout();
 			this->panel2->SuspendLayout();
 			this->panel3->SuspendLayout();
 			this->panel4->SuspendLayout();
+			this->panel5->SuspendLayout();
+			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// panel1
 			// 
 			this->panel1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(104)), static_cast<System::Int32>(static_cast<System::Byte>(236)),
 				static_cast<System::Int32>(static_cast<System::Byte>(190)));
-			this->panel1->Controls->Add(this->button_Back);
 			this->panel1->Controls->Add(this->button_Draw);
 			this->panel1->Controls->Add(this->button_Exit);
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Top;
@@ -123,22 +130,6 @@ namespace BiblioConvertProgram {
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(594, 40);
 			this->panel1->TabIndex = 0;
-			// 
-			// button_Back
-			// 
-			this->button_Back->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(52)), static_cast<System::Int32>(static_cast<System::Byte>(125)),
-				static_cast<System::Int32>(static_cast<System::Byte>(227)));
-			this->button_Back->Dock = System::Windows::Forms::DockStyle::Left;
-			this->button_Back->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.2F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
-				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->button_Back->ForeColor = System::Drawing::Color::White;
-			this->button_Back->Location = System::Drawing::Point(0, 0);
-			this->button_Back->Name = L"button_Back";
-			this->button_Back->Size = System::Drawing::Size(75, 40);
-			this->button_Back->TabIndex = 3;
-			this->button_Back->Text = L"Õ‡Á‡‰";
-			this->button_Back->UseVisualStyleBackColor = false;
-			this->button_Back->Click += gcnew System::EventHandler(this, &Converting::button_Back_Click);
 			// 
 			// button_Draw
 			// 
@@ -185,10 +176,10 @@ namespace BiblioConvertProgram {
 			this->panel2->Controls->Add(this->button_Search_open_File);
 			this->panel2->Controls->Add(this->textBox_openFile);
 			this->panel2->Controls->Add(this->label1);
-			this->panel2->Dock = System::Windows::Forms::DockStyle::Top;
-			this->panel2->Location = System::Drawing::Point(0, 40);
+			this->panel2->Location = System::Drawing::Point(0, 121);
+			this->panel2->Margin = System::Windows::Forms::Padding(0);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(594, 170);
+			this->panel2->Size = System::Drawing::Size(594, 150);
 			this->panel2->TabIndex = 1;
 			// 
 			// label_Open
@@ -259,10 +250,10 @@ namespace BiblioConvertProgram {
 			this->panel3->Controls->Add(this->button_Search_save_File);
 			this->panel3->Controls->Add(this->textBox_save_File);
 			this->panel3->Controls->Add(this->label2);
-			this->panel3->Dock = System::Windows::Forms::DockStyle::Top;
-			this->panel3->Location = System::Drawing::Point(0, 210);
+			this->panel3->Location = System::Drawing::Point(0, 271);
+			this->panel3->Margin = System::Windows::Forms::Padding(0);
 			this->panel3->Name = L"panel3";
-			this->panel3->Size = System::Drawing::Size(594, 170);
+			this->panel3->Size = System::Drawing::Size(594, 151);
 			this->panel3->TabIndex = 2;
 			// 
 			// label_Save
@@ -324,8 +315,9 @@ namespace BiblioConvertProgram {
 				static_cast<System::Int32>(static_cast<System::Byte>(190)));
 			this->panel4->Controls->Add(this->button_Close);
 			this->panel4->Controls->Add(this->button_Convert);
-			this->panel4->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->panel4->Location = System::Drawing::Point(0, 380);
+			this->panel4->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->panel4->Location = System::Drawing::Point(0, 422);
+			this->panel4->Margin = System::Windows::Forms::Padding(0);
 			this->panel4->Name = L"panel4";
 			this->panel4->Padding = System::Windows::Forms::Padding(165, 25, 45, 25);
 			this->panel4->Size = System::Drawing::Size(594, 102);
@@ -368,19 +360,102 @@ namespace BiblioConvertProgram {
 			this->button_Convert->UseVisualStyleBackColor = false;
 			this->button_Convert->Click += gcnew System::EventHandler(this, &Converting::button_Convert_Click);
 			// 
+			// panel5
+			// 
+			this->panel5->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(104)), static_cast<System::Int32>(static_cast<System::Byte>(236)),
+				static_cast<System::Int32>(static_cast<System::Byte>(190)));
+			this->panel5->Controls->Add(this->comboBox_Variant);
+			this->panel5->Controls->Add(this->label3);
+			this->panel5->Controls->Add(this->menuStrip1);
+			this->panel5->Dock = System::Windows::Forms::DockStyle::Top;
+			this->panel5->Location = System::Drawing::Point(0, 40);
+			this->panel5->Margin = System::Windows::Forms::Padding(0);
+			this->panel5->Name = L"panel5";
+			this->panel5->Size = System::Drawing::Size(594, 81);
+			this->panel5->TabIndex = 4;
+			// 
+			// comboBox_Variant
+			// 
+			this->comboBox_Variant->DropDownStyle = System::Windows::Forms::ComboBoxStyle::Simple;
+			this->comboBox_Variant->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.2F));
+			this->comboBox_Variant->FormattingEnabled = true;
+			this->comboBox_Variant->Items->AddRange(gcnew cli::array< System::Object^  >(1) { L" ÓÌ‚ÂÚÛ‚‡ÚË Á RIS ‚ TXT" });
+			this->comboBox_Variant->Location = System::Drawing::Point(296, 30);
+			this->comboBox_Variant->Margin = System::Windows::Forms::Padding(0, 30, 50, 20);
+			this->comboBox_Variant->Name = L"comboBox_Variant";
+			this->comboBox_Variant->Size = System::Drawing::Size(239, 31);
+			this->comboBox_Variant->TabIndex = 1;
+			this->comboBox_Variant->Text = L"¬Ë·Â≥Ú¸ ‚‡≥‡ÌÚ";
+			// 
+			// label3
+			// 
+			this->label3->Font = (gcnew System::Drawing::Font(L"Times New Roman", 13.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->label3->Location = System::Drawing::Point(50, 30);
+			this->label3->Margin = System::Windows::Forms::Padding(50, 30, 0, 20);
+			this->label3->MaximumSize = System::Drawing::Size(242, 31);
+			this->label3->MinimumSize = System::Drawing::Size(242, 31);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(242, 31);
+			this->label3->TabIndex = 0;
+			this->label3->Text = L"¬‡≥‡ÌÚ ÍÓÌ‚ÂÚ‡ˆ≥ø:";
+			this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(104)), static_cast<System::Int32>(static_cast<System::Byte>(236)),
+				static_cast<System::Int32>(static_cast<System::Byte>(190)));
+			this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->ÏÂÌ˛ToolStripMenuItem });
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(594, 28);
+			this->menuStrip1->TabIndex = 2;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// ÏÂÌ˛ToolStripMenuItem
+			// 
+			this->ÏÂÌ˛ToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->ÒÚ‡ÚÓ‚ËÈ≈Í‡ÌToolStripMenuItem,
+					this->ÔÓÎÂ¬Ë·ÓÛ ÓÌ‚ÂÚ‡ÚÓ‡ToolStripMenuItem
+			});
+			this->ÏÂÌ˛ToolStripMenuItem->ForeColor = System::Drawing::SystemColors::ControlText;
+			this->ÏÂÌ˛ToolStripMenuItem->Name = L"ÏÂÌ˛ToolStripMenuItem";
+			this->ÏÂÌ˛ToolStripMenuItem->Size = System::Drawing::Size(65, 24);
+			this->ÏÂÌ˛ToolStripMenuItem->Text = L"ÃÂÌ˛";
+			// 
+			// ÒÚ‡ÚÓ‚ËÈ≈Í‡ÌToolStripMenuItem
+			// 
+			this->ÒÚ‡ÚÓ‚ËÈ≈Í‡ÌToolStripMenuItem->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(104)),
+				static_cast<System::Int32>(static_cast<System::Byte>(236)), static_cast<System::Int32>(static_cast<System::Byte>(190)));
+			this->ÒÚ‡ÚÓ‚ËÈ≈Í‡ÌToolStripMenuItem->Name = L"ÒÚ‡ÚÓ‚ËÈ≈Í‡ÌToolStripMenuItem";
+			this->ÒÚ‡ÚÓ‚ËÈ≈Í‡ÌToolStripMenuItem->Size = System::Drawing::Size(283, 26);
+			this->ÒÚ‡ÚÓ‚ËÈ≈Í‡ÌToolStripMenuItem->Text = L"—Ú‡ÚÓ‚ËÈ ÂÍ‡Ì";
+			this->ÒÚ‡ÚÓ‚ËÈ≈Í‡ÌToolStripMenuItem->Click += gcnew System::EventHandler(this, &Converting::ÒÚ‡ÚÓ‚ËÈ≈Í‡ÌToolStripMenuItem_Click);
+			// 
+			// ÔÓÎÂ¬Ë·ÓÛ ÓÌ‚ÂÚ‡ÚÓ‡ToolStripMenuItem
+			// 
+			this->ÔÓÎÂ¬Ë·ÓÛ ÓÌ‚ÂÚ‡ÚÓ‡ToolStripMenuItem->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(104)),
+				static_cast<System::Int32>(static_cast<System::Byte>(236)), static_cast<System::Int32>(static_cast<System::Byte>(190)));
+			this->ÔÓÎÂ¬Ë·ÓÛ ÓÌ‚ÂÚ‡ÚÓ‡ToolStripMenuItem->Name = L"ÔÓÎÂ¬Ë·ÓÛ ÓÌ‚ÂÚ‡ÚÓ‡ToolStripMenuItem";
+			this->ÔÓÎÂ¬Ë·ÓÛ ÓÌ‚ÂÚ‡ÚÓ‡ToolStripMenuItem->Size = System::Drawing::Size(283, 26);
+			this->ÔÓÎÂ¬Ë·ÓÛ ÓÌ‚ÂÚ‡ÚÓ‡ToolStripMenuItem->Text = L"œÓÎÂ ‚Ë·ÓÛ ÍÓÌ‚ÂÚ‡ÚÓ‡";
+			this->ÔÓÎÂ¬Ë·ÓÛ ÓÌ‚ÂÚ‡ÚÓ‡ToolStripMenuItem->Click += gcnew System::EventHandler(this, &Converting::ÔÓÎÂ¬Ë·ÓÛ ÓÌ‚ÂÚ‡ÚÓ‡ToolStripMenuItem_Click);
+			// 
 			// Converting
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(594, 482);
+			this->AutoScaleDimensions = System::Drawing::SizeF(120, 120);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
+			this->ClientSize = System::Drawing::Size(594, 524);
 			this->ControlBox = false;
+			this->Controls->Add(this->panel5);
 			this->Controls->Add(this->panel4);
-			this->Controls->Add(this->panel3);
 			this->Controls->Add(this->panel2);
+			this->Controls->Add(this->panel3);
 			this->Controls->Add(this->panel1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Fixed3D;
-			this->MaximumSize = System::Drawing::Size(600, 500);
-			this->MinimumSize = System::Drawing::Size(600, 400);
+			this->MaximumSize = System::Drawing::Size(600, 530);
+			this->MinimumSize = System::Drawing::Size(600, 530);
 			this->Name = L"Converting";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->panel1->ResumeLayout(false);
@@ -389,6 +464,10 @@ namespace BiblioConvertProgram {
 			this->panel3->ResumeLayout(false);
 			this->panel3->PerformLayout();
 			this->panel4->ResumeLayout(false);
+			this->panel5->ResumeLayout(false);
+			this->panel5->PerformLayout();
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -399,6 +478,7 @@ private: System::Void button_Search_open_File_Click(System::Object^ sender, Syst
 private: System::Void button_Close_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void button_Search_save_File_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void button_Convert_Click(System::Object^ sender, System::EventArgs^ e);
-private: System::Void button_Back_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void ÒÚ‡ÚÓ‚ËÈ≈Í‡ÌToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void ÔÓÎÂ¬Ë·ÓÛ ÓÌ‚ÂÚ‡ÚÓ‡ToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }
