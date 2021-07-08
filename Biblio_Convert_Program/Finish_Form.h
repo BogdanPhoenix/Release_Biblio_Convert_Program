@@ -1,4 +1,6 @@
 #pragma once
+#include "Converting.h"
+#include "Start_Form.h"
 
 namespace BiblioConvertProgram {
 

@@ -1,23 +1,14 @@
 #include "Converting.h"
-#include "Start_Form.h"
-#include "Finish_Form.h"
 
 string way_file = "";
-System::Void BiblioConvertProgram::Converting::button_Exit_Click(System::Object^ sender, System::EventArgs^ e)
-{
-    Application::Exit();
-}
-
-System::Void BiblioConvertProgram::Converting::button_Draw_Click(System::Object^ sender, System::EventArgs^ e)
-{
-    WindowState = FormWindowState::Minimized;
-}
-
+// determine the file to be converted
 System::Void BiblioConvertProgram::Converting::button_Search_open_File_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    String^ File_Name = "";// variable to save the path to the file
     // list of available types to read
-    openFileDialog1->Filter = "Type file(*.ris)|*.ris| All files (*.*)|*.*";
+    switch (comboBox_Variant->SelectedIndex) {
+    case 0: openFileDialog1->Filter = "Type file(*.ris)|*.ris| All files (*.*)|*.*"; break;
+    }
+    String^ File_Name = "";// variable to save the path to the file
     // open the dialog box, if the user clicks "OK" then his path will be written to a variable to save the path
     if (openFileDialog1->ShowDialog() == Windows::Forms::DialogResult::OK)
         File_Name = openFileDialog1->FileName;
@@ -29,12 +20,14 @@ System::Void BiblioConvertProgram::Converting::button_Search_open_File_Click(Sys
         MessageBox::Show(this, "Не вдалося відкрити файл!", "Помилка", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
 }
-
+// determine the file in which you want to save the converted data
 System::Void BiblioConvertProgram::Converting::button_Search_save_File_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    String^ File_Name = "";// variable to save the path to the file
     // list of available types for writing
-    saveFileDialog1->Filter = "Type file(*.txt)|*.txt| All files(*.*)|*.*";
+    switch (comboBox_Variant->SelectedIndex) {
+    case 0: saveFileDialog1->Filter = "Type file(*.txt)|*.txt| All files(*.*)|*.*"; break;
+    }
+    String^ File_Name = "";// variable to save the path to the file
     // open the dialog box, if the user clicks "OK" then his path will be written to a variable to save the path
     if (saveFileDialog1->ShowDialog() == Windows::Forms::DialogResult::OK)
         File_Name = saveFileDialog1->FileName;
@@ -47,12 +40,9 @@ System::Void BiblioConvertProgram::Converting::button_Search_save_File_Click(Sys
     }
     Convert_String_to_string(File_Name, way_file);
 }
-
+// start the program and check if the user has filled in all the required fields
 System::Void BiblioConvertProgram::Converting::button_Convert_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    string file_name_RIS, file_name_TXT;
-    Convert_String_to_string(textBox_openFile->Text->ToString(), file_name_RIS);
-    Convert_String_to_string(textBox_save_File->Text->ToString(), file_name_TXT);
     // check if the user specified the path to the file
     if (textBox_openFile->Text == "C:\\" || textBox_save_File->Text == "C:\\") {
         if (textBox_openFile->Text == "C:\\")
@@ -66,27 +56,41 @@ System::Void BiblioConvertProgram::Converting::button_Convert_Click(System::Obje
         MessageBox::Show("Не вистачає деяких даних. \nБудь ласка заповніть їх.", "Увага");
     }
     else {
-        if (!Read(file_name_RIS, file_name_TXT)) {
-            MessageBox::Show("Рекомендовано завершити роботу програми! \nЗв'яжіться з техпідтримкою.", "Увага");
-            Application::Exit();
+        string name_open_file, name_save_file;
+        Convert_String_to_string(textBox_openFile->Text->ToString(), name_open_file);
+        Convert_String_to_string(textBox_save_File->Text->ToString(), name_save_file);
+        Open_Variant_Convert open;
+        open.Set_Open_File(name_open_file);
+        open.Set_Save_File(name_save_file);
+        switch (comboBox_Variant->SelectedIndex) {
+        case 0: {
+            from_RIS_to_TXT object;
+            open.Start_Program(object);
+            break;
         }
-        else {
-            Finish_Form^ finish_form = gcnew Finish_Form();
-            this->Hide();
-            finish_form->Show();
         }
+        Finish_Form^ finish_form = gcnew Finish_Form();
+        this->Hide();
+        finish_form->Show();
     }
 }
-
-System::Void BiblioConvertProgram::Converting::button_Back_Click(System::Object^ sender, System::EventArgs^ e)
+// returns to the starting form
+System::Void BiblioConvertProgram::Converting::стартовийЕкранToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    Start_Form^ start = gcnew Start_Form();
+    Start_Form^ start_form = gcnew Start_Form();
     this->Hide();
-    start->Show();
+    start_form->Show();
 }
-
-System::Void BiblioConvertProgram::Converting::button_Close_Click(System::Object^ sender, System::EventArgs^ e)
+// returns to the file conversion type selection form
+System::Void BiblioConvertProgram::Converting::полеВиборуКонвертатораToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    // check exit
-    return_from_exit->Show();
+    Converting_Type^ converting_type = gcnew Converting_Type();
+    this->Hide();
+    converting_type->Show();
 }
+// button for great work
+System::Void BiblioConvertProgram::Converting::button_Close_Click(System::Object^ sender, System::EventArgs^ e) { return_exit->Show(); }
+//exit window
+System::Void BiblioConvertProgram::Converting::button_Exit_Click(System::Object^ sender, System::EventArgs^ e) { Application::Exit(); }
+// minimizes the window to the taskbar
+System::Void BiblioConvertProgram::Converting::button_Draw_Click(System::Object^ sender, System::EventArgs^ e) { WindowState = FormWindowState::Minimized; }

@@ -128,7 +128,9 @@
   <ItemGroup>
     <ClCompile Include="Check_Exit.cpp" />
     <ClCompile Include="Class_Function.cpp" />
+    <ClCompile Include="Class_Type.cpp" />
     <ClCompile Include="Converting.cpp" />
+    <ClCompile Include="Converting_Type.cpp" />
     <ClCompile Include="Convert_Character_Data_Type.cpp" />
     <ClCompile Include="Finish_Form.cpp" />
     <ClCompile Include="Function.cpp" />
@@ -140,7 +142,11 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Class_Function.h" />
+    <ClInclude Include="Class_Type.h" />
     <ClInclude Include="Converting.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Converting_Type.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Convert_Character_Data_Type.h" />
@@ -162,6 +168,9 @@
     <EmbeddedResource Include="Converting.resx">
       <DependentUpon>Converting.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Converting_Type.resx">
+      <DependentUpon>Converting_Type.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Finish_Form.resx">
       <DependentUpon>Finish_Form.h</DependentUpon>
     </EmbeddedResource>
@@ -179,6 +188,7 @@
     <None Include="Country_Code.json" />
     <None Include="Language_Code.json" />
     <None Include="Mark_from_RIS_to_TXT.json" />
+    <None Include="Mark_Ignore.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

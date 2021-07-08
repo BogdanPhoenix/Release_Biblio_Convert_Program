@@ -1,5 +1,4 @@
 #include "Class_Function.h"
-#include "Convert_Character_Data_Type.h"
 
 //class ALL
 // implement AU label change
@@ -67,10 +66,6 @@ void ALL::Free_Transformation(wstring& sentence, wstring first_part) {
 		Work_AU(sentence, first_part);
 	else if (first_part == L"AD")
 		Work_AD(sentence, first_part);
-	// these labels are skipped
-	// rework
-	else if (first_part == L"N1" || first_part == L"ER" || first_part == L"C7")
-		new_line = false;
 	else if (first_part == L"LA")
 		Work_LA(sentence, first_part);
 	else if (first_part == L"UR") {
@@ -149,8 +144,19 @@ void ALL::Strict_Transformation(string type, int end) {
 		file.close();
 	}
 }
+//check ignore mark
+bool ALL::Check_Ignore_Mark(wstring copy_part, string type)
+{
+	json json_value;
+	ifstream file("Mark_Ignore.json");
+	file >> json_value;
+	file.close();
+	for (json::iterator element = json_value[type].begin(); element != json_value[type].end(); ++element)
+		if (copy_part == Convert_string_to_wstring(element.value()))
+			return true;
+	return false;
+}
 // search for the specified character/word from right to left
-// rework
 bool ALL::RFind(wstring sentence, wstring word, int& position) {
 	position = sentence.rfind(word);
 	if (position > 0)
@@ -176,20 +182,17 @@ JOUR::JOUR(wofstream& file_write) {
 		part.clear();
 		// define the RIS label
 		part.insert(0, line, 0, 2);
-		if (line == L"TY  - JOUR")
-			line.assign(L"#920: ASP");
-		// rework
-		else if (part == L"J2" || part == L"VL" || part == L"IS" || part == L"SP" || part == L"EP" || part == L"PY" || part == L"SN")
+		// check whether to ignore the label or not
+		if (Check_Ignore_Mark(part, "JOUR") || Check_Ignore_Mark(part, "ALL"))
 			continue;
+		else if (line == L"TY  - JOUR")
+			line.assign(L"#920: ASP");
 		else if (part == L"T2")
 			Strict_Transformation("JOUR", 9);
 		else
 			Free_Transformation(line, part);
-		// implement whether a modified sentence is written or not
-		if (new_line)
-			file_write << line + L"\n";
-		else
-			new_line = true;
+		// write a string to a file
+		file_write << line + L"\n";
 	}
 	copy_fragment.close();
 }
@@ -205,19 +208,17 @@ CONF::CONF(wofstream& file_write) {
 		part.clear();
 		// define the RIS label
 		part.insert(0, line, 0, 2);
-		if (line == L"TY  - CONF")
-			line.assign(L"#920: ASP");
-		else if (part == L"J2" || part == L"VL" || part == L"IS" || part == L"SP" || part == L"EP" || part == L"PY" || part == L"SN")
+		// check whether to ignore the label or not
+		if (Check_Ignore_Mark(part, "CONF") || Check_Ignore_Mark(part, "ALL"))
 			continue;
+		else if (line == L"TY  - CONF")
+			line.assign(L"#920: ASP");
 		else if (part == L"C3")
 			Strict_Transformation("CONF", 9);
 		else
 			Free_Transformation(line, part);
-		// implement whether a modified sentence is written or not
-		if (new_line)
-			file_write << line + L"\n";
-		else
-			new_line = true;
+		// write a string to a file
+		file_write << line + L"\n";
 	}
 	copy_fragment.close();
 }
@@ -233,11 +234,11 @@ BOOK::BOOK(wofstream& file_write) {
 		part.clear();
 		// define the RIS label
 		part.insert(0, line, 0, 2);
-		if (line == L"TY  - BOOK")
-			line.assign(L"#920: PAZK");
-		// rework
-		else if (part == L"T2" || part == L"J2" || part == L"SP" || part == L"PB" || part == L"SN")
+		// check whether to ignore the label or not
+		if (Check_Ignore_Mark(part, "BOOK") || Check_Ignore_Mark(part, "ALL"))
 			continue;
+		else if (line == L"TY  - BOOK")
+			line.assign(L"#920: PAZK");
 		else if (part == L"EP") {
 			line.replace(line.find(part), part.length() + 4, L"#215: ^A");
 			line += L"^1p.";
@@ -246,11 +247,8 @@ BOOK::BOOK(wofstream& file_write) {
 			Strict_Transformation("BOOK", 7);
 		else
 			Free_Transformation(line, part);
-		// implement whether a modified sentence is written or not
-		if (new_line)
-			file_write << line + L"\n";
-		else
-			new_line = true;
+		// write a string to a file
+		file_write << line + L"\n";
 	}
 	copy_fragment.close();
 }

@@ -35,15 +35,11 @@ namespace BiblioConvertProgram {
 			}
 		}
 	private: System::Windows::Forms::Panel^ panel1;
-	protected:
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Panel^ panel2;
 	private: System::Windows::Forms::Button^ button_Yes;
-
 	private: System::Windows::Forms::Panel^ panel3;
 	private: System::Windows::Forms::Button^ button_No;
-
-
 	private:
 		/// <summary>
 		/// Обязательная переменная конструктора.

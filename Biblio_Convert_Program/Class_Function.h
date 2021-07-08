@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string.h>
 #include <nlohmann/json.hpp>
+#include "Convert_Character_Data_Type.h"
 
 using json = nlohmann::json;
 using namespace std;
@@ -18,13 +19,13 @@ private:
 	bool RFind(wstring sentence, wstring word, int& position); // search for the specified character / word from right to left
 protected:
 	wstring line, part;
-	bool new_line = true;
 
 	void Free_Transformation(wstring& sentence, wstring first_part); // implementation of replacement of RIS label by TXT (common for all types)
 	void Strict_Transformation(string type, int end); // method for converting labels from RIS to TXT, in a certain sequence
 	void Set_Mark_DB(wstring mark_DB); // write the DB label
 	wstring Get_Mark_DB(); // output DB label
 	wstring Get_Start(); // initial value of each type
+	bool Check_Ignore_Mark(wstring copy_part, string type);//check ignore mark
 };
 
 class JOUR : public ALL {
@@ -40,6 +41,5 @@ public:
 
 class BOOK : public ALL {
 public:
-	void Work_PY_BOOK();// method of converting unique labels for BOOK type
 	BOOK(wofstream& file_write); // label conversion constructor for BOOK file
 };
