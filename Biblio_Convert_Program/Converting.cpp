@@ -62,6 +62,7 @@ System::Void BiblioConvertProgram::Converting::button_Convert_Click(System::Obje
         Open_Variant_Convert open;
         open.Set_Open_File(name_open_file);
         open.Set_Save_File(name_save_file);
+
         switch (comboBox_Variant->SelectedIndex) {
         case 0: {
             from_RIS_to_TXT object;

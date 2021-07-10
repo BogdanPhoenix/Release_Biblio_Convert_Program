@@ -1,16 +1,19 @@
-﻿  Check_Exit.cpp
+﻿D:\Visual Studio\MSBuild\Microsoft\VC\v150\Platforms\Win32\PlatformToolsets\v141_xp\Toolset.targets(39,5): warning MSB8051: поддержка Windows XP прекращена, ее не будет в последующих выпусках Visual Studio. Дополнительные сведения: https://go.microsoft.com/fwlink/?linkid=2023588.
+  Check_Exit.cpp
   Class_Function.cpp
+  Class_Type.cpp
   Converting.cpp
-D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\Converting.cpp(28,23): warning C4101: ex: неиспользованная локальная переменная
-D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\Converting.cpp(45,23): warning C4101: ex: неиспользованная локальная переменная
+D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\Converting.cpp(19): warning C4101: ex: неиспользованная локальная переменная
+D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\Converting.cpp(38): warning C4101: ex: неиспользованная локальная переменная
+  Converting_Type.cpp
   Convert_Character_Data_Type.cpp
-D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\Convert_Character_Data_Type.cpp(61,2): warning C4996: 'wcstombs': This function or variable may be unsafe. Consider using wcstombs_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\Convert_Character_Data_Type.cpp(61): warning C4996: 'wcstombs': This function or variable may be unsafe. Consider using wcstombs_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   Finish_Form.cpp
   Function.cpp
   Info.cpp
   Start_Form.cpp
-  .NETFramework,Version=v4.7.2.AssemblyAttributes.cpp
   Создание кода...
 D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\Convert_Character_Data_Type.cpp(23): warning C4172: возвращение адреса локальной или временной переменной : os
+  .NETFramework,Version=v4.0.AssemblyAttributes.cpp
   Check_Exit.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
   Biblio_Convert_Program.vcxproj -> D:\Work\Biblio_Convert_Program\Release\Biblio_Convert_Program.exe

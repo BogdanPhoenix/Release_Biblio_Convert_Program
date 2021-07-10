@@ -1,5 +1,6 @@
   BiblioConvertProgram.Check_Exit.resources - Embedded, ContainedInManifestFile, 
   BiblioConvertProgram.Converting.resources - Embedded, ContainedInManifestFile, 
+  BiblioConvertProgram.Converting_Type.resources - Embedded, ContainedInManifestFile, 
   BiblioConvertProgram.Finish_Form.resources - Embedded, ContainedInManifestFile, 
   BiblioConvertProgram.Info.resources - Embedded, ContainedInManifestFile, 
   BiblioConvertProgram.Start_Form.resources - Embedded, ContainedInManifestFile, 
@@ -21,15 +22,19 @@ Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c5619
 Class BiblioConvertProgram.Check_Exit: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class BiblioConvertProgram.Info: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class BiblioConvertProgram.Converting_Type: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class BiblioConvertProgram.Start_Form: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class BiblioConvertProgram.Finish_Form: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class BiblioConvertProgram.Converting: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-Class BiblioConvertProgram.Info: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
-  :System.Windows.Forms.Form
-    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-Class BiblioConvertProgram.Start_Form: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
-  :System.Windows.Forms.Form
-    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Int32): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName

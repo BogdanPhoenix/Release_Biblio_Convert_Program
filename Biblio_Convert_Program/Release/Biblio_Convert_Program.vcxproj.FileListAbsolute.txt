@@ -1,6 +1,0 @@
-D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\Release\BiblioConvertProgram.Check_Exit.resources
-D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\Release\BiblioConvertProgram.Converting.resources
-D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\Release\BiblioConvertProgram.Finish_Form.resources
-D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\Release\BiblioConvertProgram.Info.resources
-D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\Release\BiblioConvertProgram.Start_Form.resources
-D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\Release\Biblio_Convert_Program.vcxproj.GenerateResource.cache
