@@ -59,18 +59,18 @@ namespace BiblioConvertProgram {
 			this->button_Draw = (gcnew System::Windows::Forms::Button());
 			this->button_Exit = (gcnew System::Windows::Forms::Button());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->ìåíþToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ñòàðòîâèéÅêðàíToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->label_comboBox_Type = (gcnew System::Windows::Forms::Label());
 			this->comboBox_Type = (gcnew System::Windows::Forms::ComboBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->panel3 = (gcnew System::Windows::Forms::Panel());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
-			this->ìåíþToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ñòàðòîâèéÅêðàíToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->panel1->SuspendLayout();
 			this->panel2->SuspendLayout();
-			this->panel3->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
+			this->panel3->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// panel1
@@ -137,6 +137,36 @@ namespace BiblioConvertProgram {
 			this->panel2->Size = System::Drawing::Size(594, 81);
 			this->panel2->TabIndex = 2;
 			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(104)), static_cast<System::Int32>(static_cast<System::Byte>(236)),
+				static_cast<System::Int32>(static_cast<System::Byte>(190)));
+			this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->ìåíþToolStripMenuItem });
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(594, 30);
+			this->menuStrip1->TabIndex = 3;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// ìåíþToolStripMenuItem
+			// 
+			this->ìåíþToolStripMenuItem->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(104)),
+				static_cast<System::Int32>(static_cast<System::Byte>(236)), static_cast<System::Int32>(static_cast<System::Byte>(190)));
+			this->ìåíþToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->ñòàðòîâèéÅêðàíToolStripMenuItem });
+			this->ìåíþToolStripMenuItem->Name = L"ìåíþToolStripMenuItem";
+			this->ìåíþToolStripMenuItem->Size = System::Drawing::Size(65, 26);
+			this->ìåíþToolStripMenuItem->Text = L"Ìåíþ";
+			// 
+			// ñòàðòîâèéÅêðàíToolStripMenuItem
+			// 
+			this->ñòàðòîâèéÅêðàíToolStripMenuItem->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(104)),
+				static_cast<System::Int32>(static_cast<System::Byte>(236)), static_cast<System::Int32>(static_cast<System::Byte>(190)));
+			this->ñòàðòîâèéÅêðàíToolStripMenuItem->Name = L"ñòàðòîâèéÅêðàíToolStripMenuItem";
+			this->ñòàðòîâèéÅêðàíToolStripMenuItem->Size = System::Drawing::Size(210, 26);
+			this->ñòàðòîâèéÅêðàíToolStripMenuItem->Text = L"Ñòàðòîâèé åêðàí";
+			this->ñòàðòîâèéÅêðàíToolStripMenuItem->Click += gcnew System::EventHandler(this, &Converting_Type::ñòàðòîâèéÅêðàíToolStripMenuItem_Click);
+			// 
 			// label_comboBox_Type
 			// 
 			this->label_comboBox_Type->AutoSize = true;
@@ -154,10 +184,10 @@ namespace BiblioConvertProgram {
 				static_cast<System::Byte>(204)));
 			this->comboBox_Type->FormattingEnabled = true;
 			this->comboBox_Type->Items->AddRange(gcnew cli::array< System::Object^  >(1) { L"Êîíâåðòóâàòè ç RIS â TXT" });
-			this->comboBox_Type->Location = System::Drawing::Point(296, 30);
+			this->comboBox_Type->Location = System::Drawing::Point(307, 30);
 			this->comboBox_Type->Margin = System::Windows::Forms::Padding(0, 30, 50, 20);
 			this->comboBox_Type->Name = L"comboBox_Type";
-			this->comboBox_Type->Size = System::Drawing::Size(239, 27);
+			this->comboBox_Type->Size = System::Drawing::Size(237, 27);
 			this->comboBox_Type->TabIndex = 1;
 			this->comboBox_Type->Text = L"Âèáåð³òü âàð³àíò";
 			this->comboBox_Type->SelectedIndexChanged += gcnew System::EventHandler(this, &Converting_Type::comboBox1_SelectedIndexChanged);
@@ -183,7 +213,7 @@ namespace BiblioConvertProgram {
 			this->panel3->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->panel3->Location = System::Drawing::Point(0, 121);
 			this->panel3->Name = L"panel3";
-			this->panel3->Size = System::Drawing::Size(594, 473);
+			this->panel3->Size = System::Drawing::Size(594, 403);
 			this->panel3->TabIndex = 3;
 			// 
 			// label1
@@ -192,61 +222,31 @@ namespace BiblioConvertProgram {
 			this->label1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 18));
 			this->label1->Location = System::Drawing::Point(0, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(594, 473);
+			this->label1->Size = System::Drawing::Size(594, 403);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Ïîëÿ çàâàíòàæàòüñÿ àâòîìàòè÷íî, êîëè âè âèáåðåòå âàð³àíò êîíâåðòàö³¿";
 			this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
-			// menuStrip1
-			// 
-			this->menuStrip1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(104)), static_cast<System::Int32>(static_cast<System::Byte>(236)),
-				static_cast<System::Int32>(static_cast<System::Byte>(190)));
-			this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->ìåíþToolStripMenuItem });
-			this->menuStrip1->Location = System::Drawing::Point(0, 0);
-			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(594, 28);
-			this->menuStrip1->TabIndex = 3;
-			this->menuStrip1->Text = L"menuStrip1";
-			// 
-			// ìåíþToolStripMenuItem
-			// 
-			this->ìåíþToolStripMenuItem->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(104)), static_cast<System::Int32>(static_cast<System::Byte>(236)),
-				static_cast<System::Int32>(static_cast<System::Byte>(190)));
-			this->ìåíþToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->ñòàðòîâèéÅêðàíToolStripMenuItem });
-			this->ìåíþToolStripMenuItem->Name = L"ìåíþToolStripMenuItem";
-			this->ìåíþToolStripMenuItem->Size = System::Drawing::Size(65, 24);
-			this->ìåíþToolStripMenuItem->Text = L"Ìåíþ";
-			// 
-			// ñòàðòîâèéÅêðàíToolStripMenuItem
-			// 
-			this->ñòàðòîâèéÅêðàíToolStripMenuItem->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(104)), static_cast<System::Int32>(static_cast<System::Byte>(236)),
-				static_cast<System::Int32>(static_cast<System::Byte>(190)));
-			this->ñòàðòîâèéÅêðàíToolStripMenuItem->Name = L"ñòàðòîâèéÅêðàíToolStripMenuItem";
-			this->ñòàðòîâèéÅêðàíToolStripMenuItem->Size = System::Drawing::Size(224, 26);
-			this->ñòàðòîâèéÅêðàíToolStripMenuItem->Text = L"Ñòàðòîâèé åêðàí";
-			this->ñòàðòîâèéÅêðàíToolStripMenuItem->Click += gcnew System::EventHandler(this, &Converting_Type::ñòàðòîâèéÅêðàíToolStripMenuItem_Click);
-			// 
 			// Converting_Type
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(594, 594);
+			this->AutoScaleDimensions = System::Drawing::SizeF(120, 120);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
+			this->ClientSize = System::Drawing::Size(594, 524);
 			this->ControlBox = false;
 			this->Controls->Add(this->panel3);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Fixed3D;
-			this->MaximumSize = System::Drawing::Size(600, 600);
-			this->MinimumSize = System::Drawing::Size(600, 600);
+			this->MaximumSize = System::Drawing::Size(600, 530);
+			this->MinimumSize = System::Drawing::Size(600, 530);
 			this->Name = L"Converting_Type";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->panel1->ResumeLayout(false);
 			this->panel2->ResumeLayout(false);
 			this->panel2->PerformLayout();
-			this->panel3->ResumeLayout(false);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
+			this->panel3->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}

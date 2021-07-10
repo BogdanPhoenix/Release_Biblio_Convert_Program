@@ -380,10 +380,10 @@ namespace BiblioConvertProgram {
 			this->comboBox_Variant->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.2F));
 			this->comboBox_Variant->FormattingEnabled = true;
 			this->comboBox_Variant->Items->AddRange(gcnew cli::array< System::Object^  >(1) { L"Êîíâåğòóâàòè ç RIS â TXT" });
-			this->comboBox_Variant->Location = System::Drawing::Point(296, 30);
+			this->comboBox_Variant->Location = System::Drawing::Point(307, 30);
 			this->comboBox_Variant->Margin = System::Windows::Forms::Padding(0, 30, 50, 20);
 			this->comboBox_Variant->Name = L"comboBox_Variant";
-			this->comboBox_Variant->Size = System::Drawing::Size(239, 31);
+			this->comboBox_Variant->Size = System::Drawing::Size(237, 27);
 			this->comboBox_Variant->TabIndex = 1;
 			this->comboBox_Variant->Text = L"Âèáåğ³òü âàğ³àíò";
 			// 
@@ -409,7 +409,7 @@ namespace BiblioConvertProgram {
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->ìåíşToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(594, 28);
+			this->menuStrip1->Size = System::Drawing::Size(594, 30);
 			this->menuStrip1->TabIndex = 2;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -421,7 +421,7 @@ namespace BiblioConvertProgram {
 			});
 			this->ìåíşToolStripMenuItem->ForeColor = System::Drawing::SystemColors::ControlText;
 			this->ìåíşToolStripMenuItem->Name = L"ìåíşToolStripMenuItem";
-			this->ìåíşToolStripMenuItem->Size = System::Drawing::Size(65, 24);
+			this->ìåíşToolStripMenuItem->Size = System::Drawing::Size(65, 26);
 			this->ìåíşToolStripMenuItem->Text = L"Ìåíş";
 			// 
 			// ñòàğòîâèéÅêğàíToolStripMenuItem
