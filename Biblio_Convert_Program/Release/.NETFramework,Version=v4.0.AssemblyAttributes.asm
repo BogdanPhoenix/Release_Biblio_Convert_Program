@@ -21,7 +21,7 @@
 ; Exception Information:
 ; 0 handlers, each consisting of filtered handlers
 
-;	.formal.mptr 0,"_this$" SIG: Optional C Binding Modifier(token:0x826F191).class (token:0x826F193)
+;	.formal.mptr 0,"_this$" SIG: Optional C Binding Modifier(token:0x822F191).class (token:0x822F193)
 
 ;	.proc.beg
 ; File D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\predefined C++\CLI attribute types (compiler internal)

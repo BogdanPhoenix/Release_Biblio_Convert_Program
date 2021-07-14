@@ -6,16 +6,17 @@
 #include "Function.h"
 #include "Class_Function.h"
 using namespace std;
+
 // abstract class, used to quickly start the required converter
 class Variant_Convert {
 public:
-	virtual bool Start(string name_open_file, string name_save_file) = 0;
+	virtual void Start(string name_open_file, string name_save_file) = 0;
 };
 // implement file conversion from RIS to TXT
 class from_RIS_to_TXT : public Variant_Convert
 {
 public:
-	bool Start(string name_open_file, string name_save_file) override;
+	void Start(string name_open_file, string name_save_file) override;
 };
 // a class that recognizes which converter to run
 class Open_Variant_Convert {
@@ -27,5 +28,5 @@ public:
 	// save the name of the file to which you want to convert the data
 	void Set_Save_File(string name_save_file);
 	// start the program
-	void Start_Program(Variant_Convert& variant);
+	void Start_Program(Variant_Convert* variant);
 };

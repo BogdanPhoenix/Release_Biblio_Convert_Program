@@ -1,14 +1,8 @@
 #include "Finish_Form.h"
 //exit window
-System::Void BiblioConvertProgram::Finish_Form::button_Exit_Click(System::Object^ sender, System::EventArgs^ e)
-{
-    Application::Exit();
-}
+System::Void BiblioConvertProgram::Finish_Form::button_Exit_Click(System::Object^ sender, System::EventArgs^ e) { Application::Exit(); }
 // minimizes the window to the taskbar
-System::Void BiblioConvertProgram::Finish_Form::button_Draw_Click(System::Object^ sender, System::EventArgs^ e)
-{
-    WindowState = FormWindowState::Minimized;
-}
+System::Void BiblioConvertProgram::Finish_Form::button_Draw_Click(System::Object^ sender, System::EventArgs^ e) { WindowState = FormWindowState::Minimized; }
 // opens the converted file and terminates the program
 System::Void BiblioConvertProgram::Finish_Form::button_Finish_Click(System::Object^ sender, System::EventArgs^ e)
 {

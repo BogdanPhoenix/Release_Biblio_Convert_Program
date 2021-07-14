@@ -170,10 +170,9 @@ void ALL::Set_Mark_DB(wstring mark_DB) { this->mark_DB = mark_DB; }
 wstring ALL::Get_Mark_DB() { return this->mark_DB; }
 // initial value of each type
 wstring ALL::Get_Start() { return L"#905: ^D1^11\n"; }
-//class JOUR
-// label conversion constructor for JOUR file
-JOUR::JOUR() {}
-JOUR::JOUR(wofstream& file_write) {
+//label conversion method for JOUR file
+void JOUR::Convert(string file_name) {
+	wofstream file_write(file_name, ios::app);
 	wfstream copy_fragment;
 	copy_fragment.open("Copy_Fragment.txt", ios::in);
 	file_write << Get_Start();
@@ -195,11 +194,11 @@ JOUR::JOUR(wofstream& file_write) {
 		file_write << line + L"\n";
 	}
 	copy_fragment.close();
+	file_write.close();
 }
-
-//class CONF
-// label conversion constructor for CONF file
-CONF::CONF(wofstream& file_write) {
+//label conversion method for CONF file
+void CONF::Convert(string file_name) {
+	wofstream file_write(file_name, ios::app);
 	wfstream copy_fragment;
 	copy_fragment.open("Copy_Fragment.txt", ios::in);
 	file_write << Get_Start();
@@ -221,11 +220,11 @@ CONF::CONF(wofstream& file_write) {
 		file_write << line + L"\n";
 	}
 	copy_fragment.close();
+	file_write.close();
 }
-
-//class BOOK
-// label conversion constructor for BOOK file
-BOOK::BOOK(wofstream& file_write) {
+//label conversion method for BOOK file
+void BOOK::Convert(string file_name) {
+	wofstream file_write(file_name, ios::app);
 	wfstream copy_fragment;
 	copy_fragment.open("Copy_Fragment.txt", ios::in);
 	file_write << Get_Start();
@@ -251,4 +250,5 @@ BOOK::BOOK(wofstream& file_write) {
 		file_write << line + L"\n";
 	}
 	copy_fragment.close();
+	file_write.close();
 }
