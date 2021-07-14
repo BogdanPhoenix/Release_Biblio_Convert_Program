@@ -15,15 +15,9 @@ System::Void BiblioConvertProgram::Converting_Type::comboBox1_SelectedIndexChang
     }
 }
 //exit
-System::Void BiblioConvertProgram::Converting_Type::button_Exit_Click(System::Object^ sender, System::EventArgs^ e)
-{
-    Application::Exit();
-}
+System::Void BiblioConvertProgram::Converting_Type::button_Exit_Click(System::Object^ sender, System::EventArgs^ e) { Application::Exit(); }
 // minimizes the window to the taskbar
-System::Void BiblioConvertProgram::Converting_Type::button_Draw_Click(System::Object^ sender, System::EventArgs^ e)
-{
-    WindowState = FormWindowState::Minimized;
-}
+System::Void BiblioConvertProgram::Converting_Type::button_Draw_Click(System::Object^ sender, System::EventArgs^ e) { WindowState = FormWindowState::Minimized; }
 // return to the home screen
 System::Void BiblioConvertProgram::Converting_Type::ÒÚ‡ÚÓ‚ËÈ≈Í‡ÌToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {

@@ -15,15 +15,9 @@ int main(cli::array<System::String^>^ args) {
 		Application::Exit();
 }
 //exit window
-System::Void BiblioConvertProgram::Start_Form::button_Exit_Click(System::Object^ sender, System::EventArgs^ e)
-{
-	Application::Exit();
-}
+System::Void BiblioConvertProgram::Start_Form::button_Exit_Click(System::Object^ sender, System::EventArgs^ e) { Application::Exit(); }
 // minimizes the window to the taskbar
-System::Void BiblioConvertProgram::Start_Form::button_Draw_Click(System::Object^ sender, System::EventArgs^ e)
-{
-	WindowState = FormWindowState::Minimized;
-}
+System::Void BiblioConvertProgram::Start_Form::button_Draw_Click(System::Object^ sender, System::EventArgs^ e) { WindowState = FormWindowState::Minimized; }
 // open the information window
 System::Void BiblioConvertProgram::Start_Form::label_Info_Click(System::Object^ sender, System::EventArgs^ e) { info->Show(); }
 // open the converter type selection window

@@ -5,3 +5,4 @@ D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\x64\Release\BiblioConvertP
 D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\x64\Release\BiblioConvertProgram.Info.resources
 D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\x64\Release\BiblioConvertProgram.Start_Form.resources
 D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\x64\Release\Biblio_Convert_Program.vcxproj.GenerateResource.cache
+D:\Work\Biblio_Convert_Program\Biblio_Convert_Program\x64\Release\Biblio_Convert_Program.vcxproj.AssemblyReference.cache
