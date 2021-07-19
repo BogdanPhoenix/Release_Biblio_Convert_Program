@@ -1,15 +1,10 @@
 /.vs
 /Debug
-/Biblio_Convert_Program/Debug
-/Biblio_Convert_Program/x64/Debug
-/Setup
-/Release
-/Setup x32
-/Setup x64
+/Biblio Convert Program/Debug
+/Biblio Convert Program/x64/Debug
 /x64
-.ico
-.sln
-
+*.ico
+*.sln
 # Prerequisites
 *.d
 

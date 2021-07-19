@@ -1,0 +1,8 @@
+D:\Work\Новая папка\Biblio Convert Program\Biblio Convert Program\Debug\Biblio Convert Program.vcxproj.AssemblyReference.cache
+D:\Work\Новая папка\Biblio Convert Program\Biblio Convert Program\Debug\BiblioConvertProgram.Converting_Type.resources
+D:\Work\Новая папка\Biblio Convert Program\Biblio Convert Program\Debug\BiblioConvertProgram.Info.resources
+D:\Work\Новая папка\Biblio Convert Program\Biblio Convert Program\Debug\BiblioConvertProgram.Start_Form.resources
+D:\Work\Новая папка\Biblio Convert Program\Biblio Convert Program\Debug\Biblio Convert Program.vcxproj.GenerateResource.cache
+D:\Work\Новая папка\Biblio Convert Program\Biblio Convert Program\Debug\BiblioConvertProgram.Check_Exit.resources
+D:\Work\Новая папка\Biblio Convert Program\Biblio Convert Program\Debug\BiblioConvertProgram.Converting.resources
+D:\Work\Новая папка\Biblio Convert Program\Biblio Convert Program\Debug\BiblioConvertProgram.Finish_Form.resources

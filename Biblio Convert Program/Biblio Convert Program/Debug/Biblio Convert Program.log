@@ -1,0 +1,9 @@
+﻿  Converting.cpp
+D:\Work\Новая папка\Biblio Convert Program\Biblio Convert Program\Converting.cpp(34,23): warning C4101: ex: неиспользованная локальная переменная
+D:\Work\Новая папка\Biblio Convert Program\Biblio Convert Program\Converting.cpp(48,23): warning C4101: ex: неиспользованная локальная переменная
+  Converting_Type.cpp
+  Finish_Form.cpp
+  Start_Form.cpp
+  Создание кода...
+  Check_Exit.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
+  Biblio Convert Program.vcxproj -> D:\Work\Новая папка\Biblio Convert Program\Debug\Biblio Convert Program.exe
