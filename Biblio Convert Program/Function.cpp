@@ -16,6 +16,8 @@ bool Check_File_Fail(string name) {
 }
 // check system files
 bool System_Check() {
+	bool check = true;
+	// number of files required for the program
 	int size_file_system = sizeof(file_system) / sizeof(file_system[0]);
 	for (int i = 0; i < size_file_system; i++) {
 		ifstream file;
@@ -23,10 +25,10 @@ bool System_Check() {
 		try { file.open(file_system[i]); }
 		catch (const ifstream::failure& ex) {
 			MessageBox::Show(Convert_string_to_String("Файл " + file_system[i] + " не відкрився. \nПомилка: " + (string) ex.what()), "Увага");
-			file.close();
-			return false;
+			check = false;
 		}
 		file.close();
+		if (!check) break;
 	}
-	return true;
+	return check;
 }

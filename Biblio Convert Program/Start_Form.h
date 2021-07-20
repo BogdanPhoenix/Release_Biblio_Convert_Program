@@ -87,7 +87,8 @@ namespace BiblioConvertProgram {
 			// 
 			// button_Draw
 			// 
-			this->button_Draw->BackColor = System::Drawing::Color::Blue;
+			this->button_Draw->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(52)), static_cast<System::Int32>(static_cast<System::Byte>(125)),
+				static_cast<System::Int32>(static_cast<System::Byte>(227)));
 			this->button_Draw->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button_Draw->Dock = System::Windows::Forms::DockStyle::Right;
 			this->button_Draw->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
@@ -135,6 +136,8 @@ namespace BiblioConvertProgram {
 			this->label1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(104)), static_cast<System::Int32>(static_cast<System::Byte>(236)),
 				static_cast<System::Int32>(static_cast<System::Byte>(190)));
 			this->label1->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Arial Black", 13.8F, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->label1->Location = System::Drawing::Point(0, 0);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(419, 95);
