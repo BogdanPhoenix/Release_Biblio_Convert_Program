@@ -95,8 +95,6 @@ void ALL::Strict_Transformation(string type) {
 	mark_file >> json_value;
 	mark_file.close();
 	line.clear();
-	/*if (type == "BOOK")
-		json_size_object++;*/
 	for (int index = 0; index < json_value[type].size(); index++) {
 		exit = false;
 		for (int index_fragment = 0; index_fragment < fragment_here.size(); index_fragment++) {
@@ -115,8 +113,7 @@ void ALL::Strict_Transformation(string type) {
 					// delete data from parentheses
 					temporary_line.replace(temporary_line.find(L"("), temporary_line.find(L")") - temporary_line.find(L"(") + 1, L"");
 					pos = temporary_line.find(L"; ");
-					if (pos < 0)
-						break;
+					if (pos < 0) break;
 					temporary_line.replace(pos, 2, L"\n#10: ^a");
 				} while (true);
 				break;
@@ -134,6 +131,7 @@ void ALL::Strict_Transformation(string type) {
 							if (Convert_string_to_wstring(element_object.key()) == temporary_part && element_object.value() != "") {
 								temporary_line.replace(temporary_line.find(temporary_part), temporary_part.length() + 4, Convert_string_to_wstring(element_object.value()));
 								exit = true;
+								fragment_here.erase(fragment_here.begin() + index_fragment);
 								break;
 							}
 						}
@@ -176,10 +174,9 @@ wstring ALL::Get_Start() { return L"#905: ^D1^11\n"; }
 //label conversion method for JOUR file
 void JOUR::Convert(string file_name_save) {
 	wofstream file_write(file_name_save, ios::app);
-	vector<wstring> fragment_here = Get_Fragment_File();
 	file_write << Get_Start();
-	for (int index = 0; index < fragment_here.size(); index++) {
-		line = fragment_here[index];
+	for (int index = 0; index < Get_Fragment_File().size(); index++) {
+		line = Get_Fragment_File()[index];
 		part.clear();
 		// define the RIS label
 		part.insert(0, line, 0, 2);
@@ -200,10 +197,9 @@ void JOUR::Convert(string file_name_save) {
 //label conversion method for CONF file
 void CONF::Convert(string file_name_save) {
 	wofstream file_write(file_name_save, ios::app);
-	vector<wstring> fragment_here = Get_Fragment_File();
 	file_write << Get_Start();
-	for (int index = 0; index < fragment_here.size(); index++) {
-		line = fragment_here[index];
+	for (int index = 0; index < Get_Fragment_File().size(); index++) {
+		line = Get_Fragment_File()[index];
 		part.clear();
 		// define the RIS label
 		part.insert(0, line, 0, 2);
@@ -224,10 +220,9 @@ void CONF::Convert(string file_name_save) {
 //label conversion method for BOOK file
 void BOOK::Convert(string file_name_save) {
 	wofstream file_write(file_name_save, ios::app);
-	vector<wstring> fragment_here = Get_Fragment_File();
 	file_write << Get_Start();
-	for (int index = 0; index < fragment_here.size(); index++) {
-		line = fragment_here[index];
+	for (int index = 0; index < Get_Fragment_File().size(); index++) {
+		line = Get_Fragment_File()[index];
 		part.clear();
 		// define the RIS label
 		part.insert(0, line, 0, 2);
@@ -249,9 +244,7 @@ void BOOK::Convert(string file_name_save) {
 	}
 	file_write.close();
 }
-
+// enter the name of the file in which you want to enter the converted information
 void Start_Convert::Set_File_Name(string file_name) { this->file_name = file_name; }
-
-void Start_Convert::Start(ALL* type){ 
-	type->Convert(file_name);
-}
+//start program
+void Start_Convert::Start(ALL* type){ type->Convert(file_name); }

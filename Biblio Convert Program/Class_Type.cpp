@@ -5,7 +5,7 @@ void from_RIS_to_TXT::Start(string name_open_file, string name_save_file)
 	wstring sentence, str;
 	vector<wstring> fragment;
 	wifstream file_read(name_open_file);
-
+	ALL* type_class;
 	setlocale(LC_ALL, "utf-8");
 	while (!file_read.eof()) { 
 		getline(file_read, sentence);
@@ -13,7 +13,6 @@ void from_RIS_to_TXT::Start(string name_open_file, string name_save_file)
 		if (sentence == L"") {
 			str.insert(0, fragment[0], fragment[0].find(L"- ") + 2, 4);
 			Start_Convert start;
-			ALL* type_class;
 			//select record type converter
 			if (str == L"JOUR")
 				type_class = new JOUR;
@@ -26,11 +25,11 @@ void from_RIS_to_TXT::Start(string name_open_file, string name_save_file)
 			//start the converter
 			type_class->Set_Fragment_File(fragment);
 			start.Start(type_class);
-			delete type_class;
 			fragment.clear();
 			str.clear();
 		}
 	}
+	delete type_class;
 	file_read.close();
 }
 // save the name of the file to be converted

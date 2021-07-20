@@ -96,7 +96,8 @@ namespace BiblioConvertProgram {
 			// 
 			// button_Draw
 			// 
-			this->button_Draw->BackColor = System::Drawing::Color::Blue;
+			this->button_Draw->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(52)), static_cast<System::Int32>(static_cast<System::Byte>(125)),
+				static_cast<System::Int32>(static_cast<System::Byte>(227)));
 			this->button_Draw->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button_Draw->Dock = System::Windows::Forms::DockStyle::Right;
 			this->button_Draw->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
@@ -199,6 +200,7 @@ namespace BiblioConvertProgram {
 			// 
 			this->button_Back->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(52)), static_cast<System::Int32>(static_cast<System::Byte>(125)),
 				static_cast<System::Int32>(static_cast<System::Byte>(227)));
+			this->button_Back->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button_Back->Dock = System::Windows::Forms::DockStyle::Right;
 			this->button_Back->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->button_Back->ForeColor = System::Drawing::Color::White;

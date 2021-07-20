@@ -48,7 +48,7 @@ namespace BiblioConvertProgram {
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Panel^ panel3;
 	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::Label^ label_comboBox_Type;
+
 	protected:
 
 
@@ -72,7 +72,6 @@ namespace BiblioConvertProgram {
 			this->toolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->головнийЕкранToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
-			this->label_comboBox_Type = (gcnew System::Windows::Forms::Label());
 			this->comboBox_Type = (gcnew System::Windows::Forms::ComboBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->panel3 = (gcnew System::Windows::Forms::Panel());
@@ -99,7 +98,8 @@ namespace BiblioConvertProgram {
 			// 
 			// button_Draw
 			// 
-			this->button_Draw->BackColor = System::Drawing::Color::Blue;
+			this->button_Draw->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(52)), static_cast<System::Int32>(static_cast<System::Byte>(125)),
+				static_cast<System::Int32>(static_cast<System::Byte>(227)));
 			this->button_Draw->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button_Draw->Dock = System::Windows::Forms::DockStyle::Right;
 			this->button_Draw->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
@@ -170,30 +170,19 @@ namespace BiblioConvertProgram {
 			// 
 			this->panel2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(104)), static_cast<System::Int32>(static_cast<System::Byte>(236)),
 				static_cast<System::Int32>(static_cast<System::Byte>(190)));
-			this->panel2->Controls->Add(this->label_comboBox_Type);
 			this->panel2->Controls->Add(this->comboBox_Type);
 			this->panel2->Controls->Add(this->label1);
 			this->panel2->Dock = System::Windows::Forms::DockStyle::Top;
 			this->panel2->Location = System::Drawing::Point(0, 40);
 			this->panel2->Margin = System::Windows::Forms::Padding(0);
+			this->panel2->MaximumSize = System::Drawing::Size(594, 65);
+			this->panel2->MinimumSize = System::Drawing::Size(594, 65);
 			this->panel2->Name = L"panel2";
-			this->panel2->Padding = System::Windows::Forms::Padding(20, 15, 0, 5);
-			this->panel2->Size = System::Drawing::Size(594, 89);
+			this->panel2->Size = System::Drawing::Size(594, 65);
 			this->panel2->TabIndex = 1;
-			// 
-			// label_comboBox_Type
-			// 
-			this->label_comboBox_Type->AutoSize = true;
-			this->label_comboBox_Type->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.8F));
-			this->label_comboBox_Type->ForeColor = System::Drawing::Color::Red;
-			this->label_comboBox_Type->Location = System::Drawing::Point(24, 54);
-			this->label_comboBox_Type->Name = L"label_comboBox_Type";
-			this->label_comboBox_Type->Size = System::Drawing::Size(0, 21);
-			this->label_comboBox_Type->TabIndex = 2;
 			// 
 			// comboBox_Type
 			// 
-			this->comboBox_Type->Anchor = System::Windows::Forms::AnchorStyles::Right;
 			this->comboBox_Type->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->comboBox_Type->FormattingEnabled = true;
 			this->comboBox_Type->Items->AddRange(gcnew cli::array< System::Object^  >(1) { L"Конвертувати з RIS в TXT" });
@@ -220,9 +209,9 @@ namespace BiblioConvertProgram {
 			// 
 			this->panel3->Controls->Add(this->label2);
 			this->panel3->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->panel3->Location = System::Drawing::Point(0, 129);
+			this->panel3->Location = System::Drawing::Point(0, 105);
 			this->panel3->Name = L"panel3";
-			this->panel3->Size = System::Drawing::Size(594, 415);
+			this->panel3->Size = System::Drawing::Size(594, 356);
 			this->panel3->TabIndex = 2;
 			// 
 			// label2
@@ -233,7 +222,7 @@ namespace BiblioConvertProgram {
 			this->label2->Font = (gcnew System::Drawing::Font(L"Times New Roman", 18));
 			this->label2->Location = System::Drawing::Point(0, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(594, 415);
+			this->label2->Size = System::Drawing::Size(594, 356);
 			this->label2->TabIndex = 0;
 			this->label2->Text = L"Поля завантажаться автоматично, коли ви виберете варіант конвертації";
 			this->label2->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -242,7 +231,7 @@ namespace BiblioConvertProgram {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(120, 120);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
-			this->ClientSize = System::Drawing::Size(594, 544);
+			this->ClientSize = System::Drawing::Size(594, 461);
 			this->ControlBox = false;
 			this->Controls->Add(this->panel3);
 			this->Controls->Add(this->panel2);
@@ -250,15 +239,14 @@ namespace BiblioConvertProgram {
 			this->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
-			this->MaximumSize = System::Drawing::Size(600, 550);
-			this->MinimumSize = System::Drawing::Size(600, 550);
+			this->MaximumSize = System::Drawing::Size(600, 467);
+			this->MinimumSize = System::Drawing::Size(600, 467);
 			this->Name = L"Converting_Type";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->panel1->ResumeLayout(false);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->panel2->ResumeLayout(false);
-			this->panel2->PerformLayout();
 			this->panel3->ResumeLayout(false);
 			this->ResumeLayout(false);
 
