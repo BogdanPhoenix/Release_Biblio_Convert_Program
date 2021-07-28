@@ -9,7 +9,6 @@ BiblioConvertProgram::Converting::Converting(String^ str, int Combo_Index) {
     return_exit->Owner = this;
     return_exit->Hide();
 }
-
 // function to check if the file is empty and ask the user whether to delete the previous contents of this file
 void BiblioConvertProgram::Converting::Check_File_Is_Empty(String^ file_name)
 {
@@ -35,7 +34,7 @@ System::Void BiblioConvertProgram::Converting::button_Search_open_File_Click(Sys
     if (openFileDialog1->ShowDialog() == Windows::Forms::DialogResult::OK)
         File_Name = openFileDialog1->FileName;
     // error check
-    try { textBox_openFile->Text = File_Name; }
+    try { textBox_open_File->Text = File_Name; }
     catch (Exception^ ex) { MessageBox::Show(this, "Не вдалося відкрити файл! \nПомилка: " + ex->ToString(), "Помилка", MessageBoxButtons::OK, MessageBoxIcon::Error); }
 }
 // determine the file in which you want to save the converted data
@@ -56,21 +55,15 @@ System::Void BiblioConvertProgram::Converting::button_Search_save_File_Click(Sys
 // file conversion
 System::Void BiblioConvertProgram::Converting::button_Convert_Click(System::Object^ sender, System::EventArgs^ e){
     // check if the user specified the path to the file
-    if (textBox_openFile->Text == "C:\\" || textBox_save_File->Text == "C:\\") {
-        if (textBox_openFile->Text == "C:\\")
-            label_Open_Check->Text = "Дане поле порожнє";
-        else
-            label_Open_Check->Text = "";
-        if (textBox_save_File->Text == "C:\\")
-            label_Save_Check->Text = "Дане поле порожнє";
-        else
-            label_Save_Check->Text = "";
+    if (textBox_open_File->Text == "C:\\" || textBox_save_File->Text == "C:\\") {
+        textBox_open_File->Text == "C:\\" ? label_Open_Check->Text = "Дане поле порожнє" : label_Open_Check->Text = "";
+        textBox_save_File->Text == "C:\\" ? label_Save_Check->Text = "Дане поле порожнє" : label_Save_Check->Text = "";
         MessageBox::Show("Не вистачає деяких даних. \nБудь ласка заповніть їх.", "Увага");
     }
     else {
         string name_open_file, name_save_file;
         //record the name of the file to be converted
-        Convert_String_to_string(textBox_openFile->Text->ToString(), name_open_file);
+        Convert_String_to_string(textBox_open_File->Text->ToString(), name_open_file);
         //record the name of the file to which you want to convert
         Convert_String_to_string(textBox_save_File->Text->ToString(), name_save_file);
         if (checkBox_Full_File->Checked == true) {

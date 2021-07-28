@@ -1,12 +1,12 @@
 #include "Function.h"
 
 // an array of file names that are required for the full operation of the program
-string file_system[] = { "Country_Code.json", "Language_Code.json", "Mark_from_RIS_to_TXT.json", "Mark_Ignore.json" };
+vector<string> file_system = { "Country_Code.json", "Language_Code.json", "Mark_from_RIS_to_TXT.json", "Mark_Ignore.json" };
 
 // check if the file is empty
 bool Is_empty(fstream& pFile) { return pFile.peek() == fstream::traits_type::eof(); }
 // check and open the file
-bool Check_File_Fail(string name) {
+bool Check_File_Fail(const string& name) {
 	bool check = true;
 	fstream file(name, ios::binary | ios::in);
 	if (!file)
@@ -17,9 +17,7 @@ bool Check_File_Fail(string name) {
 // check system files
 bool System_Check() {
 	bool check = true;
-	// number of files required for the program
-	int size_file_system = sizeof(file_system) / sizeof(file_system[0]);
-	for (int i = 0; i < size_file_system; i++) {
+	for (size_t i = 0; i < file_system.size(); i++) {
 		ifstream file;
 		file.exceptions(ifstream::badbit | ifstream::failbit);
 		try { file.open(file_system[i]); }
