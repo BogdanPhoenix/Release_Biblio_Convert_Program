@@ -2,20 +2,16 @@
 
 //class ALL
 // implement AU label change
-void ALL::Work_AU(wstring part) {
+void ALL::Work_AU(const wstring& part) {
 	wstring text;
-	// TXT tag for the first author
-	if (number_AU++ == 0)
-		text = L"#700: ^A";
-	// TXT tag for other authors
-	else
-		text = L"#701: ^A";
+	// TXT tag for the first author or for other authors
+	number_AU++ == 0 ? text = L"#700: ^A" : text = L"#701: ^A";
 	// replace labels
 	line.replace(line.find(part), part.length() + 4, text);
 	line.replace(line.find(L", "), 2, L"^B");
 }
 // implement label change AD
-void ALL::Work_AD(wstring part) {
+void ALL::Work_AD(const wstring& part) {
 	json json_value;
 	int pos_str = 0;
 	ifstream file("Country_Code.json");
@@ -25,14 +21,14 @@ void ALL::Work_AD(wstring part) {
 	line.replace(line.find(part), part.length() + 4, L"#711: ^A");
 	line.replace(line.rfind(L", "), 2, L"^S");
 	// replace the country name with its code
-	for (json::iterator it = json_value.begin(); it != json_value.end(); ++it)
+	for (auto it : json_value.items())
 		if (RFind(line, Convert_string_to_wstring(it.key()), pos_str)) {
 			line.replace(pos_str, it.key().length(), Convert_string_to_wstring(it.value()));
 			break;
 		}
 }
 // implement LA tag change
-void ALL::Work_LA(wstring part) {
+void ALL::Work_LA(const wstring& part) {
 	wstring language;
 	json json_value;
 	// Language search
@@ -41,7 +37,7 @@ void ALL::Work_LA(wstring part) {
 	file >> json_value;
 	file.close();
 	// replace the language with its code
-	for(json::iterator element = json_value.begin(); element != json_value.end(); ++element)
+	for(auto element : json_value.items())
 		if (language == Convert_string_to_wstring(element.key())) {
 			line.replace(line.find(language), language.length(), Convert_string_to_wstring(element.value()));
 			break;
@@ -50,9 +46,8 @@ void ALL::Work_LA(wstring part) {
 	line.replace(line.find(part), part.length() + 4, L"#101: ");
 }
 // implementation of replacement of RIS label by TXT (common for all types)
-void ALL::Free_Transformation(wstring& first_part) {
+void ALL::Free_Transformation(const wstring& first_part) {
 	json json_value;
-	bool exit = false;
 	ifstream file("Mark_from_RIS_to_TXT.json");
 	file >> json_value;
 	file.close();
@@ -74,19 +69,17 @@ void ALL::Free_Transformation(wstring& first_part) {
 	}
 	// other labels
 	else {
-		for (json::iterator element_array = json_value["ALL"].begin(); element_array != json_value["ALL"].end(); ++element_array) {
-			if (exit) break;
-			for (json::iterator element = element_array.value().begin(); element != element_array.value().end(); ++element)
-				if (first_part == Convert_string_to_wstring(element.key())) {
-					line.replace(line.find(first_part), first_part.length() + 4, Convert_string_to_wstring(element.value()));
-					exit = true;
-					break;
-				}
+		for (auto element_array : json_value["ALL"].items()) {
+			auto element = element_array.value().begin();
+			if (first_part == Convert_string_to_wstring(element.key())) {
+				line.replace(line.find(first_part), first_part.length() + 4, Convert_string_to_wstring(element.value()));
+				break;
+			}	
 		}
 	}
 }
 // method for converting labels from RIS to TXT, in a certain sequence
-void ALL::Strict_Transformation(string type) {
+void ALL::Strict_Transformation(const string& type) {
 	wstring temporary_line, temporary_part;
 	vector<wstring> fragment_here = Get_Fragment_File();
 	json json_value;
@@ -95,9 +88,9 @@ void ALL::Strict_Transformation(string type) {
 	mark_file >> json_value;
 	mark_file.close();
 	line.clear();
-	for (int index = 0; index < json_value[type].size(); index++) {
+	for (size_t index = 0; index < json_value[type].size(); index++) {
 		exit = false;
-		for (int index_fragment = 0; index_fragment < fragment_here.size(); index_fragment++) {
+		for (size_t index_fragment = 0; index_fragment < fragment_here.size(); index_fragment++) {
 			// Entrance
 			if (exit) break;
 			temporary_line = fragment_here[index_fragment];
@@ -119,22 +112,20 @@ void ALL::Strict_Transformation(string type) {
 				break;
 			}
 			// assign the beginning of an array of the appropriate type
-			for (json::iterator element_file = json_value[type].begin(); element_file != json_value[type].end(); ++element_file) {
-				// loop to find the appropriate object in the array
-				for (json::iterator element_array = element_file.value().begin(); element_array != element_file.value().end(); ++element_array) {
-					// Entrance
-					if (exit) break;
-					if (stoi(element_array.key()) == index) {
-						// assign key and variable value
-						for (json::iterator element_object = element_array.value().begin(); element_object != element_array.value().end(); ++element_object) {
-							// substitute
-							if (Convert_string_to_wstring(element_object.key()) == temporary_part && element_object.value() != "") {
-								temporary_line.replace(temporary_line.find(temporary_part), temporary_part.length() + 4, Convert_string_to_wstring(element_object.value()));
-								exit = true;
-								fragment_here.erase(fragment_here.begin() + index_fragment);
-								break;
-							}
-						}
+			for (auto element_file : json_value[type].items()) {
+				// check the index of the conversion sequence
+				if (stoi(element_file.key()) == index) {
+					// search for the required label
+					auto element_object = element_file.value().begin();
+					// substitute
+					if (Convert_string_to_wstring(element_object.key()) == temporary_part) {
+						temporary_line.replace(temporary_line.find(temporary_part), temporary_part.length() + 4, Convert_string_to_wstring(element_object.value()));
+						fragment_here.erase(fragment_here.begin() + index_fragment);
+						fragment.erase(fragment.begin() + index_fragment);
+						if (index_fragment <= index_the_main_fragment)
+							index_the_main_fragment--;
+						exit = true;
+						break;
 					}
 				}
 			}
@@ -143,12 +134,12 @@ void ALL::Strict_Transformation(string type) {
 	}
 }
 //check ignore mark
-bool ALL::Check_Ignore_Mark(wstring copy_part, string type){
+bool ALL::Check_Ignore_Mark(const wstring& copy_part, const string& type){
 	json json_value;
 	ifstream file("Mark_Ignore.json");
 	file >> json_value;
 	file.close();
-	for (json::iterator element = json_value[type].begin(); element != json_value[type].end(); ++element)
+	for (auto element : json_value[type].items())
 		if (copy_part == Convert_string_to_wstring(element.value()))
 			return true;
 	return false;
@@ -158,25 +149,22 @@ void ALL::Set_Fragment_File(vector<wstring>& fragment) { this->fragment = fragme
 // method for outputting the address in which the file fragment lies
 vector<wstring>& ALL::Get_Fragment_File() { return this->fragment; }
 // search for the specified character/word from right to left
-bool ALL::RFind(wstring sentence, wstring word, int& position) {
+bool ALL::RFind(const wstring& sentence, const wstring& word, int& position) {
 	position = sentence.rfind(word);
-	if (position > 0)
-		return true;
-	else
-		return false;
+	return position > 0;
 }
 // write the DB label
-void ALL::Set_Mark_DB(wstring mark_DB) { this->mark_DB = mark_DB; }
+void ALL::Set_Mark_DB(const wstring& mark_DB) { this->mark_DB = mark_DB; }
 // output DB label
 wstring ALL::Get_Mark_DB() { return this->mark_DB; }
 // initial value of each type
 wstring ALL::Get_Start() { return L"#905: ^D1^11\n"; }
 //label conversion method for JOUR file
-void JOUR::Convert(string file_name_save) {
+void JOUR::Convert(const string& file_name_save) {
 	wofstream file_write(file_name_save, ios::app);
 	file_write << Get_Start();
-	for (int index = 0; index < Get_Fragment_File().size(); index++) {
-		line = Get_Fragment_File()[index];
+	for (index_the_main_fragment = 0; index_the_main_fragment < Get_Fragment_File().size(); index_the_main_fragment++) {
+		line = Get_Fragment_File()[index_the_main_fragment];
 		part.clear();
 		// define the RIS label
 		part.insert(0, line, 0, 2);
@@ -195,11 +183,11 @@ void JOUR::Convert(string file_name_save) {
 	file_write.close();
 }
 //label conversion method for CONF file
-void CONF::Convert(string file_name_save) {
+void CONF::Convert(const string& file_name_save) {
 	wofstream file_write(file_name_save, ios::app);
 	file_write << Get_Start();
-	for (int index = 0; index < Get_Fragment_File().size(); index++) {
-		line = Get_Fragment_File()[index];
+	for (index_the_main_fragment = 0; index_the_main_fragment < Get_Fragment_File().size(); index_the_main_fragment++) {
+		line = Get_Fragment_File()[index_the_main_fragment];
 		part.clear();
 		// define the RIS label
 		part.insert(0, line, 0, 2);
@@ -218,11 +206,11 @@ void CONF::Convert(string file_name_save) {
 	file_write.close();
 }
 //label conversion method for BOOK file
-void BOOK::Convert(string file_name_save) {
+void BOOK::Convert(const string& file_name_save) {
 	wofstream file_write(file_name_save, ios::app);
 	file_write << Get_Start();
-	for (int index = 0; index < Get_Fragment_File().size(); index++) {
-		line = Get_Fragment_File()[index];
+	for (index_the_main_fragment = 0; index_the_main_fragment < Get_Fragment_File().size(); index_the_main_fragment++) {
+		line = Get_Fragment_File()[index_the_main_fragment];
 		part.clear();
 		// define the RIS label
 		part.insert(0, line, 0, 2);
@@ -245,6 +233,6 @@ void BOOK::Convert(string file_name_save) {
 	file_write.close();
 }
 // enter the name of the file in which you want to enter the converted information
-void Start_Convert::Set_File_Name(string file_name) { this->file_name = file_name; }
+void Start_Convert::Set_File_Name(const string& file_name) { this->file_name = file_name; }
 //start program
 void Start_Convert::Start(ALL* type){ type->Convert(file_name); }

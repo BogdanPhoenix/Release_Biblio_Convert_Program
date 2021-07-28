@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+
 #include "Function.h"
 #include "Check_Exit.h"
 #include "Start_Form.h"
@@ -56,7 +57,8 @@ namespace BiblioConvertProgram {
 	private: System::Windows::Forms::Panel^ panel3;
 	private: System::Windows::Forms::Button^ button_Search_open_File;
 	private: System::Windows::Forms::CheckBox^ checkBox_Full_File;
-	private: System::Windows::Forms::TextBox^ textBox_openFile;
+	private: System::Windows::Forms::TextBox^ textBox_open_File;
+
 
 
 	private: System::Windows::Forms::Label^ label_Open_Check;
@@ -107,7 +109,7 @@ namespace BiblioConvertProgram {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->panel3 = (gcnew System::Windows::Forms::Panel());
 			this->button_Search_open_File = (gcnew System::Windows::Forms::Button());
-			this->textBox_openFile = (gcnew System::Windows::Forms::TextBox());
+			this->textBox_open_File = (gcnew System::Windows::Forms::TextBox());
 			this->label_Open_Check = (gcnew System::Windows::Forms::Label());
 			this->label_Open = (gcnew System::Windows::Forms::Label());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
@@ -268,7 +270,7 @@ namespace BiblioConvertProgram {
 			this->panel3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(104)), static_cast<System::Int32>(static_cast<System::Byte>(236)),
 				static_cast<System::Int32>(static_cast<System::Byte>(190)));
 			this->panel3->Controls->Add(this->button_Search_open_File);
-			this->panel3->Controls->Add(this->textBox_openFile);
+			this->panel3->Controls->Add(this->textBox_open_File);
 			this->panel3->Controls->Add(this->label_Open_Check);
 			this->panel3->Controls->Add(this->label_Open);
 			this->panel3->Dock = System::Windows::Forms::DockStyle::Top;
@@ -295,19 +297,19 @@ namespace BiblioConvertProgram {
 			this->button_Search_open_File->UseVisualStyleBackColor = false;
 			this->button_Search_open_File->Click += gcnew System::EventHandler(this, &Converting::button_Search_open_File_Click);
 			// 
-			// textBox_openFile
+			// textBox_open_File
 			// 
-			this->textBox_openFile->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->textBox_open_File->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->textBox_openFile->Location = System::Drawing::Point(28, 55);
-			this->textBox_openFile->Margin = System::Windows::Forms::Padding(20, 10, 3, 10);
-			this->textBox_openFile->MaximumSize = System::Drawing::Size(360, 30);
-			this->textBox_openFile->MinimumSize = System::Drawing::Size(360, 30);
-			this->textBox_openFile->Multiline = true;
-			this->textBox_openFile->Name = L"textBox_openFile";
-			this->textBox_openFile->Size = System::Drawing::Size(360, 30);
-			this->textBox_openFile->TabIndex = 2;
-			this->textBox_openFile->Text = L"C:\\";
+			this->textBox_open_File->Location = System::Drawing::Point(28, 55);
+			this->textBox_open_File->Margin = System::Windows::Forms::Padding(20, 10, 3, 10);
+			this->textBox_open_File->MaximumSize = System::Drawing::Size(360, 30);
+			this->textBox_open_File->MinimumSize = System::Drawing::Size(360, 30);
+			this->textBox_open_File->Multiline = true;
+			this->textBox_open_File->Name = L"textBox_open_File";
+			this->textBox_open_File->Size = System::Drawing::Size(360, 30);
+			this->textBox_open_File->TabIndex = 2;
+			this->textBox_open_File->Text = L"C:\\";
 			// 
 			// label_Open_Check
 			// 
