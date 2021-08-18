@@ -9,7 +9,7 @@ int main(cli::array<System::String^>^ args) {
 	Application::SetCompatibleTextRenderingDefault(false);
 
 	BiblioConvertProgram::Start_Form form;
-	System_Check() ? Application::Run(% form) : Application::Exit();
+	Function::System_Check() ? Application::Run(% form) : Application::Exit();
 }
 //constructor
 BiblioConvertProgram::Start_Form::Start_Form(void){

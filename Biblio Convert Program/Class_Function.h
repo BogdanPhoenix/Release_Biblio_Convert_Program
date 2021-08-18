@@ -9,49 +9,44 @@
 
 using json = nlohmann::json;
 using namespace std;
-//parent class
-class ALL {
+
+class ALL_RIS_TXT {
 private:
 	int number_AU;
-	wstring mark_DB, size_delete_dash = L" - ";
+	wstring line, part, mark_DB, size_delete_dash = L" - ";
 	vector<wstring> fragment;
-	void Work_AU(const wstring&); // implement AU label change
-	void Work_AD(const wstring&); // implement label change AD
-	void Work_LA(const wstring&); // implement LA tag change
-	
-protected:
 	size_t index_the_main_fragment;
-	wstring line, part;
-	void Free_Transformation(const wstring&); // implementation of replacement of RIS label by TXT (common for all types)
-	void Strict_Transformation(const string&); // method for converting labels from RIS to TXT, in a certain sequence
-	void Set_Mark_DB(const wstring&); // write the DB label
-	wstring Get_Mark_DB(); // output DB label
-	wstring Get_Start(); // initial value of each type
-	bool Check_Ignore_Mark(const wstring&, const string&);//check ignore mark\
+
+	// implement AU label change
+	void Work_AU(const wstring& part);
+	// implement label change AD
+	void Work_AD(const wstring& part);
+	// implement LA tag change
+	void Work_LA(const wstring& part);
+	// output DB label
+	wstring Get_Mark_DB();
+	// write the DB label
+	void Set_Mark_DB(const wstring& mark_DB);
+	
+	// method for converting labels from RIS to TXT, in a certain sequence
+	wstring Strict_Transformation(const string& type);
+	// implementation of replacement of RIS label by TXT (common for all types)
+	void Free_Transformation(const wstring& first_part);
+	//check ignore mark
+	bool Check_Ignore_Mark(const wstring& copy_part, const wstring& type);
+	// the label that is placed at the beginning of the file
+	wstring First_Label(); 
+
+	// conversion of excellent tags JOUR
+	void Jour();
+	// conversion of excellent tags CONF
+	void Conf();
+	// conversion of excellent tags BOOK
+	void Book();
 
 public:
-	virtual void Convert(const string&) = 0;
-	void Set_Fragment_File(vector<wstring>&);// method for writing the address in which the file fragment lies
-	vector<wstring>& Get_Fragment_File(); // method for outputting the address in which the file fragment lies
-};
-class JOUR : public ALL {
-public:
-	void Convert(const string& file_name_save) override; //label conversion method for JOUR file
-};
-
-class CONF : public ALL {
-public:
-	void Convert(const string&) override; //label conversion method for CONF file
-};
-
-class BOOK : public ALL {
-public:
-	void Convert(const string&) override; // label conversion method for BOOK file
-};
-//class to determine the type of conversion
-class Start_Convert {
-private: string file_name;
-public:
-	void Set_File_Name(const string&);
-	void Start(ALL*);
+	// file conversion
+	void Convert(const string& file_name_save, const wstring& identifier);
+	// method for writing the address in which the file fragment lies
+	void Set_Fragment_File(vector<wstring>& fragment);
 };

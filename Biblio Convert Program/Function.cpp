@@ -1,12 +1,11 @@
 #include "Function.h"
 
 // an array of file names that are required for the full operation of the program
-vector<string> file_system = { "Country_Code.json", "Language_Code.json", "Mark_from_RIS_to_TXT.json", "Mark_Ignore.json" };
-
+vector<string> Function::file_system = { "Country_Code.json", "Language_Code.json", "Mark_from_RIS_to_TXT.json", "Mark_Ignore.json" };
 // check if the file is empty
-bool Is_empty(fstream& pFile) { return pFile.peek() == fstream::traits_type::eof(); }
+bool Function::Is_empty(fstream& pFile) { return pFile.peek() == fstream::traits_type::eof(); }
 // check and open the file
-bool Check_File_Fail(const string& name) {
+bool Function::Check_File_Fail(const string& name){
 	bool check = true;
 	fstream file(name, ios::binary | ios::in);
 	if (!file)
@@ -15,14 +14,14 @@ bool Check_File_Fail(const string& name) {
 	return check;
 }
 // check system files
-bool System_Check() {
+bool Function::System_Check(){
 	bool check = true;
 	for (size_t i = 0; i < file_system.size(); i++) {
 		ifstream file;
 		file.exceptions(ifstream::badbit | ifstream::failbit);
 		try { file.open(file_system[i]); }
 		catch (const ifstream::failure& ex) {
-			MessageBox::Show(Convert_string_to_String("Файл " + file_system[i] + " не відкрився. \nПомилка: " + (string) ex.what()), "Увага");
+			MessageBox::Show(Convert_Character_Data_Type::Convert_string_to_String("Файл " + file_system[i] + " не відкрився. \nПомилка: " + (string)ex.what()), "Увага");
 			check = false;
 		}
 		file.close();
