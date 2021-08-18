@@ -1,8 +1,8 @@
 #include "Converting.h"
 //constructor
-BiblioConvertProgram::Converting::Converting(String^ str, int Combo_Index) {
+BiblioConvertProgram::Converting::Converting(String^ text, int Combo_Index) {
     InitializeComponent();
-    textBox_Variant_Convert->Text = str;
+    textBox_Variant_Convert->Text = text;
     this->Combo_Index = Combo_Index;
     // we make the main form parental
     return_exit = gcnew Check_Exit();
@@ -10,29 +10,34 @@ BiblioConvertProgram::Converting::Converting(String^ str, int Combo_Index) {
     return_exit->Hide();
 }
 // function to check if the file is empty and ask the user whether to delete the previous contents of this file
-void BiblioConvertProgram::Converting::Check_File_Is_Empty(String^ file_name)
-{
+void BiblioConvertProgram::Converting::Check_File_Is_Empty(String^ file_name){
     string name;
-    Convert_String_to_string(file_name, name);
+    Convert_Character_Data_Type::Convert_String_to_string(file_name, name);
     fstream file(name, ios::in);
-    if (!Is_empty(file)) {
+    if (!Function::Is_empty(file)) {
+        checkBox_Full_File->Visible = true;
+        checkBox_Full_File->Text = "Видалити вміст файлу " + file_name;
         checkBox_Full_File->Checked = true;
-        checkBox_Full_File->Text += " " + file_name;
-        MessageBox::Show("Даний файл " + file_name + ", не є пустим. \nЯкщо ви не хочете, щоб дані було видалено, будь ласка приберіть прапорець з відповідного поля", "Увага");
+        MessageBox::Show("Даний файл " + file_name + ", не є пустим. \nЯкщо ви не хочете, щоб дані було видалено, будь ласка приберіть прапорець у відповідному полі", "Увага");
     }
+    else
+        checkBox_Full_File->Visible = false;
     file.close();
 }
 // determine the file to be converted
-System::Void BiblioConvertProgram::Converting::button_Search_open_File_Click(System::Object^ sender, System::EventArgs^ e)
-{
+System::Void BiblioConvertProgram::Converting::button_Search_open_File_Click(System::Object^ sender, System::EventArgs^ e){
     // list of available types to read
     switch (Combo_Index) {
         case 0: openFileDialog1->Filter = "Type file(*.ris)|*.ris| All files (*.*)|*.*"; break;
     }
     String^ File_Name = "";// variable to save the path to the file
     // open the dialog box, if the user clicks "OK" then his path will be written to a variable to save the path
-    if (openFileDialog1->ShowDialog() == Windows::Forms::DialogResult::OK)
+    if (openFileDialog1->ShowDialog() == Windows::Forms::DialogResult::OK) {
         File_Name = openFileDialog1->FileName;
+        label_Open_Check->Text = "";
+    }
+    else
+        label_Open_Check->Text = "Дане поле порожнє";
     // error check
     try { textBox_open_File->Text = File_Name; }
     catch (Exception^ ex) { MessageBox::Show(this, "Не вдалося відкрити файл! \nПомилка: " + ex->ToString(), "Помилка", MessageBoxButtons::OK, MessageBoxIcon::Error); }
@@ -45,8 +50,12 @@ System::Void BiblioConvertProgram::Converting::button_Search_save_File_Click(Sys
     }
     String^ File_Name = "";// variable to save the path to the file
     // open the dialog box, if the user clicks "OK" then his path will be written to a variable to save the path
-    if (saveFileDialog1->ShowDialog() == Windows::Forms::DialogResult::OK)
+    if (saveFileDialog1->ShowDialog() == Windows::Forms::DialogResult::OK) {
         File_Name = saveFileDialog1->FileName;
+        label_Save_Check->Text = "";
+    }
+    else
+        label_Save_Check->Text = "Дане поле порожнє";
     // error check
     try { textBox_save_File->Text = File_Name; }
     catch (Exception^ ex) { MessageBox::Show(this, "Не вдалося відкрити файл! \nПомилка: " + ex->ToString(), "Помилка", MessageBoxButtons::OK, MessageBoxIcon::Error); }
@@ -55,17 +64,14 @@ System::Void BiblioConvertProgram::Converting::button_Search_save_File_Click(Sys
 // file conversion
 System::Void BiblioConvertProgram::Converting::button_Convert_Click(System::Object^ sender, System::EventArgs^ e){
     // check if the user specified the path to the file
-    if (textBox_open_File->Text == "C:\\" || textBox_save_File->Text == "C:\\") {
-        textBox_open_File->Text == "C:\\" ? label_Open_Check->Text = "Дане поле порожнє" : label_Open_Check->Text = "";
-        textBox_save_File->Text == "C:\\" ? label_Save_Check->Text = "Дане поле порожнє" : label_Save_Check->Text = "";
+    if (textBox_open_File->Text == "C:\\" || textBox_save_File->Text == "C:\\") 
         MessageBox::Show("Не вистачає деяких даних. \nБудь ласка заповніть їх.", "Увага");
-    }
     else {
         string name_open_file, name_save_file;
         //record the name of the file to be converted
-        Convert_String_to_string(textBox_open_File->Text->ToString(), name_open_file);
+        Convert_Character_Data_Type::Convert_String_to_string(textBox_open_File->Text->ToString(), name_open_file);
         //record the name of the file to which you want to convert
-        Convert_String_to_string(textBox_save_File->Text->ToString(), name_save_file);
+        Convert_Character_Data_Type::Convert_String_to_string(textBox_save_File->Text->ToString(), name_save_file);
         if (checkBox_Full_File->Checked == true) {
             wofstream file_save(name_save_file, ios::trunc);
             file_save.close();
@@ -80,8 +86,9 @@ System::Void BiblioConvertProgram::Converting::button_Convert_Click(System::Obje
         }
         open.Start_Program(object);
         delete object;
+        this->Enabled;
         Finish_Form^ finish_form = gcnew Finish_Form();
-        finish_form->Set_Way_File(Convert_string_to_String(name_save_file));
+        finish_form->Set_Way_File(Convert_Character_Data_Type::Convert_string_to_String(name_save_file));
         this->Hide();
         finish_form->Show();
     }

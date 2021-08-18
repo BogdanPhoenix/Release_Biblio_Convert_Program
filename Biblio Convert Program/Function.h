@@ -10,6 +10,12 @@ using namespace std;
 using namespace System;
 using namespace System::Windows::Forms;
 
-bool Is_empty(fstream& pFile);// check if the file is empty
-bool Check_File_Fail(const string& name);// check and open the file
-bool System_Check();// check system files
+public class Function 
+{
+private: static vector<string> file_system;
+public: 
+	static bool Is_empty(fstream& pFile);// check if the file is empty
+	static bool Check_File_Fail(const string& name);// check and open the file
+	static bool System_Check();// check system files
+};
+

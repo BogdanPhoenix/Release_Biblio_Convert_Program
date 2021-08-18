@@ -28,7 +28,7 @@ namespace BiblioConvertProgram {
 	private: int Combo_Index;
 	public:
 		//constructor
-		Converting(String^ str, int Combo_Index);
+		Converting(String^ text, int Combo_Index);
 		// function to check if the file is empty and ask the user whether to delete the previous contents of this file
 		void Check_File_Is_Empty(String^ file_name);
 
@@ -364,10 +364,10 @@ namespace BiblioConvertProgram {
 			this->checkBox_Full_File->Location = System::Drawing::Point(28, 129);
 			this->checkBox_Full_File->Margin = System::Windows::Forms::Padding(3, 10, 3, 3);
 			this->checkBox_Full_File->Name = L"checkBox_Full_File";
-			this->checkBox_Full_File->Size = System::Drawing::Size(228, 26);
+			this->checkBox_Full_File->Size = System::Drawing::Size(18, 17);
 			this->checkBox_Full_File->TabIndex = 4;
-			this->checkBox_Full_File->Text = L"Видалити вміст файлу";
 			this->checkBox_Full_File->UseVisualStyleBackColor = true;
+			this->checkBox_Full_File->Visible = false;
 			// 
 			// textBox_save_File
 			// 
