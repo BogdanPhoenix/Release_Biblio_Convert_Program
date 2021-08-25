@@ -12,10 +12,10 @@ using namespace std;
 
 class ALL_RIS_TXT {
 private:
-	int number_AU;
-	wstring line, part, mark_DB, size_delete_dash = L" - ";
+	int number_AU = 0;
+	wstring line, part, mark_DB;
+	wstring size_delete_dash = L" - ";
 	vector<wstring> fragment;
-	size_t index_the_main_fragment;
 
 	// implement AU label change
 	void Work_AU(const wstring& part);
