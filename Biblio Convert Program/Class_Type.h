@@ -2,8 +2,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 
-#include "Function.h"
 #include "Class_Function.h"
 using namespace std;
 

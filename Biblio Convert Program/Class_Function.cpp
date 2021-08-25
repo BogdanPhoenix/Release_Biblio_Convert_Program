@@ -4,25 +4,27 @@
 // implement AU label change
 void ALL_RIS_TXT::Work_AU(const wstring& part) {
 	// replace labels
+	wstring AU_label = L", ";
 	line.replace(line.find(part), line.find(size_delete_dash) + size_delete_dash.size(), number_AU++ == 0 ? L"#700: ^A" : L"#701: ^A");
-	line.replace(line.find(L", "), 2, L"^B");
+	line.replace(line.find(AU_label), AU_label.size(), L"^B");
 }
 
 // implement label change AD
 void ALL_RIS_TXT::Work_AD(const wstring& part) {
-	int pos_str;
+	size_t position_str;
+	wstring AD_label = L", ";
 	json json_value;
 	ifstream file("Country_Code.json");
 	file >> json_value;
 	file.close();
 	// replace labels
 	line.replace(line.find(part), line.find(size_delete_dash) + size_delete_dash.size(), L"#711: ^A");
-	line.replace(line.rfind(L", "), 2, L"^S");
+	line.replace(line.rfind(AD_label), AD_label.size(), L"^S");
 	// replace the country name with its code
 	for (auto it : json_value.items()) {
-		pos_str = line.rfind(Convert_Character_Data_Type::Convert_string_to_wstring(it.key()));
-		if (pos_str >= 0) {
-			line.replace(pos_str, it.key().length(), Convert_Character_Data_Type::Convert_string_to_wstring(it.value()));
+		position_str = line.rfind(Convert_Character_Data_Type::Convert_string_to_wstring(it.key()));
+		if (position_str != size_t::MaxValue) {
+			line.replace(position_str, it.key().length(), Convert_Character_Data_Type::Convert_string_to_wstring(it.value()));
 			break;
 		}
 	}
@@ -54,54 +56,35 @@ void ALL_RIS_TXT::Set_Mark_DB(const wstring& mark_DB) { this->mark_DB = mark_DB;
 
 // method for converting labels from RIS to TXT, in a certain sequence
 wstring ALL_RIS_TXT::Strict_Transformation(const string& type) {
-	wstring temporary_line, temporary_part, result_line;
+	wstring result_line;
 	vector<wstring> fragment_here = fragment;
-	bool exit;
 	json json_value;
 	ifstream mark_file("Mark_from_RIS_to_TXT.json");
 	mark_file >> json_value;
 	mark_file.close();
-	for (size_t index = 0; index < json_value[type].size(); index++) {
-		exit = false;
-		for (size_t index_fragment_here = 0; index_fragment_here < fragment_here.size(); index_fragment_here++) {
-			// Entrance
-			if (exit) break;
-			temporary_line = fragment_here[index_fragment_here];
-			temporary_part.clear();
-			// define the RIS label
-			temporary_part.insert(0, temporary_line, 0, 2);
-			// assign the beginning of an array of the appropriate type
-			for (auto element_file : json_value[type].items())
-				// check the index of the conversion sequence
-				if (stoi(element_file.key()) == index) {
-					// search for the required label
-					auto element_object = element_file.value().begin();
-					// substitute
-					if (Convert_Character_Data_Type::Convert_string_to_wstring(element_object.key()) == temporary_part) {
-						temporary_line.replace(temporary_line.find(temporary_part), temporary_line.find(size_delete_dash) + size_delete_dash.size(), Convert_Character_Data_Type::Convert_string_to_wstring(element_object.value()));
-						fragment_here.erase(fragment_here.begin() + index_fragment_here);
-						fragment.erase(fragment.begin() + index_fragment_here);
-						if (index_fragment_here <= index_the_main_fragment)
-							index_the_main_fragment--;
-						exit = true;
-						break;
-					}
-				}
+
+	for (auto element_file : json_value[type].items()) {
+		auto element_object = element_file.value().begin();
+		//search for a line in a piece of text that starts with the desired RIS label
+		auto result = find_if(begin(fragment_here), end(fragment_here), [&element_object](const wstring& find_fragment) { return !find_fragment.find(Convert_Character_Data_Type::Convert_string_to_wstring(element_object.key())); });
+		//replacement of labels
+		if (result != end(fragment_here)) {
+			result->replace(result->find(Convert_Character_Data_Type::Convert_string_to_wstring(element_object.key())), result->find(size_delete_dash) + size_delete_dash.size(), Convert_Character_Data_Type::Convert_string_to_wstring(element_object.value()));
+			result_line += *result;
 		}
-		result_line += temporary_line;
 	}
 	// replace label SN for type BOOK
-	auto result = find_if(fragment_here.begin(), fragment_here.end(), [&](const wstring& find_fragment) { return !find_fragment.find(L"SN"); });
+	auto result = find_if(fragment_here.begin(), fragment_here.end(), [](const wstring& find_fragment) { return !find_fragment.find(L"SN"); });
 	if (result != fragment_here.end() && type == "BOOK") {
-		int pos;
+		size_t position;
 		result->replace(result->find(L"SN"), result->find(size_delete_dash) + size_delete_dash.size(), L"\n#10: ^a");
 		do {
 			//rework
 			// delete data from parentheses
 			result->replace(result->find(L"("), result->find(L")") - result->find(L"(") + 1, L"");
-			pos = result->find(L"; ");
-			if (pos < 0) break;
-			result->replace(pos, 2, L"\n#10: ^a");
+			position = result->find(L"; ");
+			if (position == size_t::MaxValue) break;
+			result->replace(position, 2, L"\n#10: ^a");
 		} while (true);
 		result_line += *result;
 	}
@@ -187,8 +170,8 @@ void ALL_RIS_TXT::Book() {
 void ALL_RIS_TXT::Convert(const string& file_name_save, const wstring& identifier){
 	wofstream file_write(file_name_save, ios::app);
 	file_write << First_Label();
-	for (index_the_main_fragment = 0; index_the_main_fragment < fragment.size(); index_the_main_fragment++) {
-		line = fragment[index_the_main_fragment];
+	for (auto fragment_element : fragment) {
+		line = fragment_element;
 		part.clear();
 		// define the RIS label
 		part.insert(0, line, 0, 2);
@@ -203,7 +186,7 @@ void ALL_RIS_TXT::Convert(const string& file_name_save, const wstring& identifie
 			Conf();
 		if (identifier == L"BOOK")
 			Book();
-		
+
 		// write a string to a file
 		file_write << line + L"\n";
 	}
